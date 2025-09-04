@@ -14,12 +14,11 @@
 }:
 
 let
-  cmakeBool = b: if b then "ON" else "OFF";
   tinygltf = callPackage ./tinygltf.nix { };
 in
 stdenv.mkDerivation (finalAttrs: {
-  version = "1.5.7";
   pname = "draco";
+  version = "1.5.7";
 
   src = fetchFromGitHub {
     owner = "google";
@@ -32,8 +31,13 @@ stdenv.mkDerivation (finalAttrs: {
   # ld: unknown option: --start-group
   postPatch = ''
     substituteInPlace cmake/draco_targets.cmake \
-      --replace "^Clang" "^AppleClang"
+      --replace-fail "^Clang" "^AppleClang"
   '';
+
+  nativeBuildInputs = [
+    cmake
+    python3
+  ];
 
   buildInputs = [
     gtest
@@ -44,21 +48,16 @@ stdenv.mkDerivation (finalAttrs: {
     tinygltf
   ];
 
-  nativeBuildInputs = [
-    cmake
-    python3
-  ];
-
   cmakeFlags = [
-    "-DDRACO_ANIMATION_ENCODING=${cmakeBool withAnimation}"
-    "-DDRACO_GOOGLETEST_PATH=${gtest}"
-    "-DBUILD_SHARED_LIBS=${cmakeBool true}"
-    "-DDRACO_TRANSCODER_SUPPORTED=${cmakeBool withTranscoder}"
+    (lib.cmakeFeature "DRACO_GOOGLETEST_PATH" (builtins.toString gtest))
+    (lib.cmakeBool "DRACO_ANIMATION_ENCODING" withAnimation)
+    (lib.cmakeBool "BUILD_SHARED_LIBS" true)
+    (lib.cmakeBool "DRACO_TRANSCODER_SUPPORTED" withTranscoder)
   ]
   ++ lib.optionals withTranscoder [
-    "-DDRACO_EIGEN_PATH=${eigen}/include/eigen3"
-    "-DDRACO_FILESYSTEM_PATH=${ghc_filesystem}"
-    "-DDRACO_TINYGLTF_PATH=${tinygltf}"
+    (lib.cmakeFeature "DRACO_EIGEN_PATH" "${eigen}/include/eigen3")
+    (lib.cmakeFeature "DRACO_FILESYSTEM_PATH" (builtins.toString ghc_filesystem))
+    (lib.cmakeFeature "DRACO_TINYGLTF_PATH" (builtins.toString tinygltf))
   ];
 
   env.CXXFLAGS = toString [
