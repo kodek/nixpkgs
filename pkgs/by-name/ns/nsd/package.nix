@@ -35,7 +35,7 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-+ezCz3m6UFgPLfYpGO/EQAhMW/EQV9tEwZqpZDzUteg=";
   };
 
-  nativeBuildInputs = lib.optionals withSystemd [
+  nativeBuildInputs = [
     pkg-config
   ];
 
