@@ -9505,8 +9505,6 @@ with pkgs;
 
   sway-contrib = recurseIntoAttrs (callPackages ../applications/misc/sway-contrib { });
 
-  i3-easyfocus = callPackage ../applications/window-managers/i3/easyfocus.nix { };
-
   i3-layout-manager = callPackage ../applications/window-managers/i3/layout-manager.nix { };
 
   i3-ratiosplit = callPackage ../applications/window-managers/i3/i3-ratiosplit.nix { };
