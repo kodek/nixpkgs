@@ -9505,8 +9505,6 @@ with pkgs;
 
   sway-contrib = recurseIntoAttrs (callPackages ../applications/misc/sway-contrib { });
 
-  workstyle = callPackage ../applications/window-managers/i3/workstyle.nix { };
-
   wmfocus = callPackage ../applications/window-managers/i3/wmfocus.nix { };
 
   ikiwiki = callPackage ../applications/misc/ikiwiki {
