@@ -9505,8 +9505,6 @@ with pkgs;
 
   sway-contrib = recurseIntoAttrs (callPackages ../applications/misc/sway-contrib { });
 
-  i3wsr = callPackage ../applications/window-managers/i3/wsr.nix { };
-
   i3-wk-switch = callPackage ../applications/window-managers/i3/wk-switch.nix { };
 
   workstyle = callPackage ../applications/window-managers/i3/workstyle.nix { };
