@@ -1,11 +1,10 @@
 {
   lib,
-  buildPythonPackage,
+  python3Packages,
   fetchPypi,
-  i3ipc,
 }:
 
-buildPythonPackage (finalAttrs: {
+python3Packages.buildPythonPackage (finalAttrs: {
   pname = "i3-balance-workspace";
   version = "1.8.6";
   format = "setuptools";
@@ -15,7 +14,7 @@ buildPythonPackage (finalAttrs: {
     hash = "sha256-zJdn/Q6r60FQgfehtQfeDkmN0Rz3ZaqgNhiWvjyQFy0=";
   };
 
-  propagatedBuildInputs = [ i3ipc ];
+  propagatedBuildInputs = [ python3Packages.i3ipc ];
 
   doCheck = false; # project has no test
   pythonImportsCheck = [ "i3_balance_workspace" ];
