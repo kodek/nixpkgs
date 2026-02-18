@@ -9505,8 +9505,6 @@ with pkgs;
 
   sway-contrib = recurseIntoAttrs (callPackages ../applications/misc/sway-contrib { });
 
-  i3lock-fancy-rapid = callPackage ../applications/window-managers/i3/lock-fancy-rapid.nix { };
-
   i3status = callPackage ../applications/window-managers/i3/status.nix { };
 
   i3wsr = callPackage ../applications/window-managers/i3/wsr.nix { };
