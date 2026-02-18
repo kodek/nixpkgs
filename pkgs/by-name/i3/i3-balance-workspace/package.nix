@@ -7,14 +7,26 @@
 python3Packages.buildPythonPackage (finalAttrs: {
   pname = "i3-balance-workspace";
   version = "1.8.6";
-  format = "setuptools";
+  pyproject = true;
 
   src = fetchPypi {
     inherit (finalAttrs) pname version;
     hash = "sha256-zJdn/Q6r60FQgfehtQfeDkmN0Rz3ZaqgNhiWvjyQFy0=";
   };
 
-  propagatedBuildInputs = [ python3Packages.i3ipc ];
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail 'poetry.masonry.api' 'poetry.core.masonry.api' \
+      --replace-fail 'poetry>=' 'poetry-core>='
+  '';
+
+  build-system = [
+    python3Packages.poetry-core
+  ];
+
+  dependencies = [
+    python3Packages.i3ipc
+  ];
 
   doCheck = false; # project has no test
   pythonImportsCheck = [ "i3_balance_workspace" ];
