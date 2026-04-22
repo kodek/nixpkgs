@@ -1224,6 +1224,8 @@ self: super: with self; {
 
   audible = callPackage ../development/python-modules/audible { };
 
+  audio-hotplug = callPackage ../development/python-modules/audio-hotplug { };
+
   audioop-lts =
     if pythonAtLeast "3.13" then callPackage ../development/python-modules/audioop-lts { } else null;
 
