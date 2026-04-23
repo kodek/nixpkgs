@@ -8985,6 +8985,8 @@ self: super: with self; {
 
   lifelines = callPackage ../development/python-modules/lifelines { };
 
+  lifx-emulator-core = callPackage ../development/python-modules/lifx-emulator-core { };
+
   lightgbm = callPackage ../development/python-modules/lightgbm { };
 
   lightify = callPackage ../development/python-modules/lightify { };
