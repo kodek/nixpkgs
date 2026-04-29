@@ -12668,6 +12668,8 @@ self: super: with self; {
   # https://github.com/opensteno/plover_plugins_registry/blob/master/unsupported.json
   plover = plover_4;
 
+  plover-dict-commands = callPackage ../development/python-modules/plover-dict-commands { };
+
   plover-stroke = callPackage ../development/python-modules/plover-stroke { };
 
   plover_4 = callPackage ../development/python-modules/plover/4.nix {
