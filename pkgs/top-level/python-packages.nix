@@ -12670,6 +12670,8 @@ self: super: with self; {
 
   plover-dict-commands = callPackage ../development/python-modules/plover-dict-commands { };
 
+  plover-last-translation = callPackage ../development/python-modules/plover-last-translation { };
+
   plover-stroke = callPackage ../development/python-modules/plover-stroke { };
 
   plover_4 = callPackage ../development/python-modules/plover/4.nix {
