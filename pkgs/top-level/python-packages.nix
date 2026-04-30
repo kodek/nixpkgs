@@ -12674,6 +12674,8 @@ self: super: with self; {
 
   plover-modal-dictionary = callPackage ../development/python-modules/plover-modal-dictionary { };
 
+  plover-python-dictionary = callPackage ../development/python-modules/plover-python-dictionary { };
+
   plover-stroke = callPackage ../development/python-modules/plover-stroke { };
 
   plover_4 = callPackage ../development/python-modules/plover/4.nix {
