@@ -318,7 +318,6 @@ goBuild (finalAttrs: {
       if (rocmRequested || cudaRequested || vulkanRequested) then platforms.linux else platforms.unix;
     mainProgram = "ollama";
     maintainers = with maintainers; [
-      dit7ya
       prusnak
     ];
   };
