@@ -12676,6 +12676,8 @@ self: super: with self; {
 
   plover-python-dictionary = callPackage ../development/python-modules/plover-python-dictionary { };
 
+  plover-stitching = callPackage ../development/python-modules/plover-stitching { };
+
   plover-stroke = callPackage ../development/python-modules/plover-stroke { };
 
   plover_4 = callPackage ../development/python-modules/plover/4.nix {
