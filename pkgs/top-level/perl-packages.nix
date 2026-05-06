@@ -20938,6 +20938,9 @@ with self;
       url = "mirror://cpan/authors/id/I/IL/ILYAZ/modules/Math-Pari-2.030528.tar.gz";
       hash = "sha256-Z/dNIWxpY1qxxuo+J84ZdQqUorVgrnKIuy1s9xT85sg=";
     };
+    patches = lib.optionals stdenv.hostPlatform.isDarwin [
+      ../development/perl-modules/Math-Pari-darwin-callback-abi.patch
+    ];
     meta = {
       description = "Perl interface to PARI";
       license = with lib.licenses; [
