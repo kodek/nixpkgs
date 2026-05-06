@@ -23,7 +23,7 @@
   pytestCheckHook,
 
 }:
-buildPythonPackage rec {
+buildPythonPackage (finalAttrs: {
   pname = "cnvkit";
   version = "0.9.13";
   pyproject = true;
@@ -31,7 +31,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "etal";
     repo = "cnvkit";
-    tag = "v${version}";
+    tag = "v${finalAttrs.version}";
     hash = "sha256-6W0rJUeHO7m3zacgkL3WzyFVmdet1zJAGyafsQv1AXE=";
   };
 
@@ -133,8 +133,8 @@ buildPythonPackage rec {
   meta = {
     homepage = "https://cnvkit.readthedocs.io";
     description = "Python library and command-line software toolkit to infer and visualize copy number from high-throughput DNA sequencing data";
-    changelog = "https://github.com/etal/cnvkit/releases/tag/v${version}";
+    changelog = "https://github.com/etal/cnvkit/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.asl20;
     maintainers = [ lib.maintainers.jbedo ];
   };
-}
+})
