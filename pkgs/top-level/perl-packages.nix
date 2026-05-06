@@ -2416,8 +2416,8 @@ with self;
     };
 
     preConfigure = ''
-      echo "LIB = ${pkgs.db.out}/lib" > config.in
-      echo "INCLUDE = ${pkgs.db.dev}/include" >> config.in
+      echo "LIB = ${pkgs.db4.out}/lib" > config.in
+      echo "INCLUDE = ${pkgs.db4.dev}/include" >> config.in
     '';
     meta = {
       description = "Perl extension for Berkeley DB version 2, 3, 4, 5 or 6";
