@@ -2656,6 +2656,34 @@ with self;
       # Fix out of memory error on Perl 5.19.4 and later.
       ../development/perl-modules/boost-geometry-utils-fix-oom.patch
     ];
+    postPatch = lib.optionalString stdenv.hostPlatform.isDarwin ''
+      # Clang on Darwin defaults to a newer C++ mode where the old bundled Boost
+      # headers no longer compile.
+      substituteInPlace Build.PL \
+        --replace-fail "extra_compiler_flags => [qw(-DHAS_BOOL)]" \
+          "extra_compiler_flags => [qw(-DHAS_BOOL -std=c++14)]"
+
+      # Avoid Boost.MPL enum wrappers that modern Clang rejects as out-of-range
+      # enum constant expressions.
+      substituteInPlace src/boost/numeric/conversion/detail/int_float_mixture.hpp \
+        --replace-fail '#include "boost/mpl/integral_c.hpp"' "" \
+        --replace-fail "mpl::integral_c<int_float_mixture_enum, integral_to_integral>" "int_float_mixture_constant<integral_to_integral>" \
+        --replace-fail "mpl::integral_c<int_float_mixture_enum, integral_to_float>" "int_float_mixture_constant<integral_to_float>" \
+        --replace-fail "mpl::integral_c<int_float_mixture_enum, float_to_integral>" "int_float_mixture_constant<float_to_integral>" \
+        --replace-fail "mpl::integral_c<int_float_mixture_enum, float_to_float>" "int_float_mixture_constant<float_to_float>"
+      perl -i -pe 'if ($. == 22) { $_ .= "  template<int_float_mixture_enum v> struct int_float_mixture_constant { static const int_float_mixture_enum value = v; typedef int_float_mixture_constant type; typedef int_float_mixture_enum value_type; operator int_float_mixture_enum() const { return value; } };\n" }' \
+        src/boost/numeric/conversion/detail/int_float_mixture.hpp
+
+      # Same workaround for the user-defined-type/builtin-type conversion enum.
+      substituteInPlace src/boost/numeric/conversion/detail/udt_builtin_mixture.hpp \
+        --replace-fail '#include "boost/mpl/integral_c.hpp"' "" \
+        --replace-fail "mpl::integral_c<udt_builtin_mixture_enum, builtin_to_builtin>" "udt_builtin_mixture_constant<builtin_to_builtin>" \
+        --replace-fail "mpl::integral_c<udt_builtin_mixture_enum, builtin_to_udt>" "udt_builtin_mixture_constant<builtin_to_udt>" \
+        --replace-fail "mpl::integral_c<udt_builtin_mixture_enum, udt_to_builtin>" "udt_builtin_mixture_constant<udt_to_builtin>" \
+        --replace-fail "mpl::integral_c<udt_builtin_mixture_enum, udt_to_udt>" "udt_builtin_mixture_constant<udt_to_udt>"
+      perl -i -pe 'if ($. == 21) { $_ .= "  template<udt_builtin_mixture_enum v> struct udt_builtin_mixture_constant { static const udt_builtin_mixture_enum value = v; typedef udt_builtin_mixture_constant type; typedef udt_builtin_mixture_enum value_type; operator udt_builtin_mixture_enum() const { return value; } };\n" }' \
+        src/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
+    '';
     buildInputs = [
       ExtUtilsCppGuess
       ExtUtilsTypemapsDefault
