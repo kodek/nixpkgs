@@ -25936,6 +25936,11 @@ with self;
       url = "mirror://cpan/authors/id/R/RU/RURBAN/Net-Ping-2.75.tar.gz";
       hash = "sha256-tH3zz9lpLM0Aca05/nRxjrwy9ZcBVWpgT9FaCfCeDXQ=";
     };
+    preCheck = ''
+      # On Linux these are skipped early ("no echo port"); on Darwin they proceed and
+      # hit external DNS (www.about.com), which fails in the sandbox.
+      rm -f t/400_ping_syn.t t/410_syn_host.t
+    '';
     meta = {
       description = "Check a remote host for reachability";
       license = with lib.licenses; [
