@@ -18617,6 +18617,8 @@ with self;
       hash = "sha256-BGSH8ITBL6HIIq/8X33lbv7ZtIkFpCbmMaa5ScEU2Gw=";
     };
     outputs = [ "out" ];
+    # Keep generated XS code stable across rebuilds.
+    env.PERL_HASH_SEED = "0";
     buildInputs = [
       pkgs.apacheHttpd
       pkgs.apr
@@ -18625,6 +18627,8 @@ with self;
       ExtUtilsXSBuilder
     ];
     propagatedBuildInputs = [ (pkgs.apacheHttpdPackages.mod_perl.override { inherit perl; }) ];
+    # Avoid libtool misdetecting gcc as the linker.
+    configureFlags = [ "LD=ld" ];
     makeMakerFlags = [
       "--with-apache2-src=${pkgs.apacheHttpd.dev}"
       "--with-apache2-apxs=${pkgs.apacheHttpd.dev}/bin/apxs"
@@ -18634,10 +18638,10 @@ with self;
     ];
     preConfigure = ''
       # override broken prereq check
-      substituteInPlace configure --replace "prereq_check=\"\$PERL \$PERL_OPTS build/version_check.pl\"" "prereq_check=\"echo\""
+      substituteInPlace configure --replace-fail "prereq_check=\"\$PERL \$PERL_OPTS build/version_check.pl\"" "prereq_check=\"echo\""
     '';
     preBuild = ''
-      substituteInPlace apreq2-config --replace "dirname" "${pkgs.coreutils}/bin/dirname"
+      substituteInPlace apreq2-config --replace-fail "dirname" "${pkgs.coreutils}/bin/dirname"
     '';
     installPhase = ''
       mkdir $out
@@ -18666,6 +18670,8 @@ with self;
       rm -r $out/nix
     '';
     doCheck = false; # test would need to start apache httpd
+    # Apache::Test resolves localhost while generating glue/perl (Makefile.PL / t/TEST).
+    __darwinAllowLocalNetworking = true;
     meta = {
       description = "Wrapper for libapreq2's module/handle API";
       license = with lib.licenses; [ asl20 ];
