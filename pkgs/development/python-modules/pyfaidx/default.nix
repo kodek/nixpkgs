@@ -15,14 +15,14 @@
 
 buildPythonPackage rec {
   pname = "pyfaidx";
-  version = "0.9.0.3";
+  version = "0.9.0.4";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "mdshw5";
     repo = "pyfaidx";
     tag = "v${version}";
-    hash = "sha256-R8k1h2FAlA/6eTJqH/Z2jHAyis2w5VDd1LcyE1hgbFc=";
+    hash = "sha256-hefRqpI9xzlfdUbr8mpQ6I1+EGAmS50f28avbtRMlSk=";
   };
 
   build-system = [
@@ -45,9 +45,8 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "pyfaidx" ];
 
-  preCheck = ''
-    bgzip --keep tests/data/genes.fasta
-  '';
+  # Require a network access to download test files
+  doCheck = false;
 
   meta = {
     description = "Python classes for indexing, retrieval, and in-place modification of FASTA files using a samtools compatible index";
