@@ -20925,7 +20925,7 @@ with self;
     # Workaround build failure on -fno-common toolchains:
     #   ld: libPARI/libPARI.a(compat.o):(.bss+0x8): multiple definition of
     #   `overflow'; Pari.o:(.bss+0x80): first defined here
-    env.NIX_CFLAGS_COMPILE = "-fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration";
+    env.NIX_CFLAGS_COMPILE = "-std=gnu17 -fcommon -Wno-error=implicit-int -Wno-error=implicit-function-declaration";
     preConfigure = "cp ${pari_tgz} pari-${pariversion}.tar.gz";
     makeMakerFlags = [ "pari_tgz=pari-${pariversion}.tar.gz" ];
     src = fetchurl {
