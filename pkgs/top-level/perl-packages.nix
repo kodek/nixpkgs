@@ -30871,6 +30871,7 @@ with self;
         artistic1
         gpl1Plus
       ];
+      platforms = lib.platforms.linux; # configure probes PF_NETLINK; unavailable on Darwin
     };
   };
 
