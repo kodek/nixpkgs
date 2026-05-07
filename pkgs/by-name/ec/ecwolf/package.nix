@@ -1,7 +1,7 @@
 {
   stdenv,
   lib,
-  fetchFromBitbucket,
+  fetchFromGitHub,
   cmake,
   pkg-config,
   makeWrapper,
@@ -21,9 +21,9 @@ stdenv.mkDerivation (finalAttrs: {
   pname = "ecwolf";
   version = "1.4.2";
 
-  src = fetchFromBitbucket {
-    owner = "ecwolf";
-    repo = "ecwolf";
+  src = fetchFromGitHub {
+    owner = "ECWolfEngine";
+    repo = "ECWolf";
     tag = finalAttrs.version;
     hash = "sha256-T5K6B2fWMKMLB/662p/YLEv0Od9n0vUakznyoOnr0kI=";
   };
