@@ -49,7 +49,7 @@ buildNpmPackage rec {
 
   meta = {
     homepage = "https://github.com/factoriolab/factoriolab";
-    changelog = "https://github.com/factoriolab/factoriolab/releases/tag/${version}";
+    changelog = "https://github.com/factoriolab/factoriolab/releases/tag/v${version}";
     description = "Angular-based calculator for factory games like Factorio and Dyson Sphere Program";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ patrickdag ];
