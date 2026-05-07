@@ -13090,6 +13090,13 @@
     githubId = 168684553;
     name = "João Marques";
   };
+  joibel = {
+    email = "alan@clucas.org";
+    github = "Joibel";
+    githubId = 1827156;
+    name = "Alan Clucas";
+    keys = [ { fingerprint = "EBE6 85B9 4904 22E1 EC94  7B17 79C7 9CBD BAF6 4C13"; } ];
+  };
   joinemm = {
     email = "joonas@rautiola.co";
     github = "joinemm";
