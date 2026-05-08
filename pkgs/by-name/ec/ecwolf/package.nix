@@ -15,7 +15,6 @@
   writers,
   python3Packages,
   nix-update,
-  fetchpatch,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
