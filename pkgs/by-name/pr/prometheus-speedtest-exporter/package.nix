@@ -4,15 +4,15 @@
   fetchFromGitHub,
 }:
 
-buildGoModule rec {
+buildGoModule (finalAttrs: {
   __structuredAttrs = true;
   pname = "prometheus-speedtest-exporter";
-  version = "v1.0.0";
+  version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "podocarp";
     repo = "speedtest_exporter";
-    rev = version;
+    tag = "v${finalAttrs.version}";
     hash = "sha256-n9eunZRssS13mTOeFeZ/PpfSj430DKf3ZRS10hY4Ps8=";
   };
 
@@ -25,4 +25,4 @@ buildGoModule rec {
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [ podocarp ];
   };
-}
+})
