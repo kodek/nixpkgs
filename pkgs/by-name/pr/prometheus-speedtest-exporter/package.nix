@@ -4,25 +4,25 @@
   fetchFromGitHub,
 }:
 
-buildGoModule {
+buildGoModule rec {
   __structuredAttrs = true;
   pname = "prometheus-speedtest-exporter";
-  version = "0.0.5-unstable-2026-04-29";
+  version = "v1.0.0";
 
   src = fetchFromGitHub {
     owner = "podocarp";
     repo = "speedtest_exporter";
-    rev = "e82be2ecb5d0cbcd5a6a21909afed6991b5d7e00";
-    hash = "sha256-7uy1rVll7YzM9WeQQKKSiI4nblIPADD6h/5z/diCH4E=";
+    rev = version;
+    hash = "sha256-n9eunZRssS13mTOeFeZ/PpfSj430DKf3ZRS10hY4Ps8=";
   };
 
-  vendorHash = "sha256-w113vWnXM4h3zckmj39Qx/oZFaH9Mq0xUSqNxopdQO0=";
+  vendorHash = "sha256-HBg44D0CUc4HYCBwGrswnrqG5o5ltA6UT8L0oWetlIc=";
 
   meta = {
     description = "Speedtest.net Exporter for the Prometheus monitoring system";
     mainProgram = "speedtest_exporter";
-    homepage = "https://github.com/danopstech/speedtest_exporter";
+    homepage = "https://github.com/podocarp/speedtest_exporter";
     license = lib.licenses.gpl3Only;
-    maintainers = [ ];
+    maintainers = with lib.maintainers; [ podocarp ];
   };
 }
