@@ -50,6 +50,11 @@ stdenv.mkDerivation (finalAttrs: {
       [ "--disable-gui" ]
   );
 
+  installPhase = lib.optional (stdenv.hostPlatform.isDarwin && enableGui) ''
+    mkdir -p $out/Applications
+    cp -R src/ophcrack.app $out/Applications/ophcrack.app
+  '';
+
   meta = {
     description = "Free Windows password cracker based on rainbow tables";
     homepage = "https://ophcrack.sourceforge.io";
