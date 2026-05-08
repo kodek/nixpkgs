@@ -17,9 +17,7 @@
   mpfr,
   proj,
   python3,
-  qtxmlpatterns,
-  qwt,
-  wrapQtAppsHook,
+  libsForQt5,
 }:
 
 let
@@ -59,7 +57,7 @@ stdenv.mkDerivation (finalAttrs: {
     cmake
     doxygen
     graphviz
-    wrapQtAppsHook
+    libsForQt5.wrapQtAppsHook
   ];
 
   buildInputs = [
@@ -74,8 +72,8 @@ stdenv.mkDerivation (finalAttrs: {
     mpfr
     proj
     python
-    qtxmlpatterns
-    qwt
+    libsForQt5.qtxmlpatterns
+    libsForQt5.qwt
   ];
 
   meta = {

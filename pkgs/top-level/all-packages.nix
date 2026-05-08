@@ -11619,8 +11619,6 @@ with pkgs;
     cudaSupport = true;
   };
 
-  gplates = libsForQt5.callPackage ../applications/science/misc/gplates { };
-
   megam = callPackage ../applications/science/misc/megam {
     inherit (ocaml-ng.ocamlPackages_4_14) ocaml;
   };
