@@ -38,6 +38,7 @@ stdenv.mkDerivation rec {
       (debian-patch "sanitize-bison.patch" "sha256-gU6JG32j2yIOwehZTUSvIr4TSDdlg+p1U3bhfZHMEDY=")
       (debian-patch "01_termio.patch" "sha256-vLyhn1gqm6v+5e8jOiNyCUgEEY7dNSWKuxkUSoCZLxE=")
       (debian-patch "03_fsflags-4.5.patch" "sha256-ML7Qvf85vEBp+iwm6PSosMAn/frYdEOSHRToEggmR8M=")
+      (debian-patch "06_sysctl.patch" "sha256-GY2alw3um+j2fxA7gp6029Baej25PFQFgGgNbplP/P0=")
       (debian-patch "linux5.11.patch" "sha256-N7WwnTfwOxBfIiKntcFOqHTH9r2gd7NMEzic7szzR+Y=")
       (debian-patch "termiox-no-more-exists-since-kernel-5.12.patch" "sha256-cocgEYKoDMDnGk9VNQDtgoVxMGnnNpdae0hzgUlacOw=")
       (debian-patch "missing-prototypes.patch" "sha256-RbVLVqAfjRN4FDt116WlIw2rKpYuOUxDmA+I7SziAJk=")
