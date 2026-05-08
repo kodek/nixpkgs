@@ -95,12 +95,17 @@ EOF
       )
     fi
 
-    tar --strip-components=1 --no-wildcards-match-slash --wildcards -xzf "$tarball" \*/eng/Versions.props \*/global.json \*/prep\*.sh
-    artifactsVersion=$(xq -r '.Project.PropertyGroup |
-            map(select(.PrivateSourceBuiltArtifactsVersion))
-            | .[] | .PrivateSourceBuiltArtifactsVersion' eng/Versions.props)
+    getProperty() {
+      xq -er ".Project.PropertyGroup | add | .$1" "$2"
+    }
 
-    if [[ "$artifactsVersion" != "" ]]; then
+    tar --strip-components=1 --no-wildcards-match-slash --wildcards -xzf "$tarball" \*/eng/Versions.props \*/global.json \*/prep\*.sh
+    set +e
+    artifactsVersion=$(getProperty PrivateSourceBuiltArtifactsVersion eng/Versions.props)
+    rc=$?
+    set -e
+
+    if [[ $rc == 0 ]]; then
       artifactVar=$(grep ^defaultArtifactsRid= prep-source-build.sh)
       eval "$artifactVar"
 
@@ -120,11 +125,11 @@ EOF
         [[ $? == 22 ]]
         artifactsUrl=https://ci.dot.net/public/source-build/$artifactsFile
       }
-    else
-      artifactsUrl=$(xq -r '.Project.PropertyGroup |
-                map(select(.PrivateSourceBuiltArtifactsUrl))
-                | .[] | .PrivateSourceBuiltArtifactsUrl' eng/Versions.props)
+    elif [[ $rc == 1 ]]; then
+      artifactsUrl=$(getProperty PrivateSourceBuiltArtifactsUrl eng/Versions.props)
       artifactsUrl="${artifactsUrl/dotnetcli.azureedge.net/builds.dotnet.microsoft.com}"
+    else
+      exit $rc
     fi
 
     artifactsHash=$(nix-prefetch-url "$artifactsUrl")
@@ -150,7 +155,7 @@ EOF
     if [[ $band == 1xx ]]; then
       getBootstrap() {
         pkgs/development/compilers/dotnet/binary/update.sh \
-          -o "$output"/bootstrap-sdk.nix --sdk "$1" >&2
+          -o "$output"/bootstrap-sdk.nix --vmr-bootstrap --sdk "$1" >&2
       }
 
       getBootstrap "$sdkVersion" || if [[ $? == 2 ]]; then

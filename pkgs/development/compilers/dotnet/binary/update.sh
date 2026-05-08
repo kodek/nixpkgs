@@ -7,7 +7,7 @@ shopt -s inherit_errexit
 
 trap 'exit 1' ERR
 
-rids=({linux-{,musl-}{arm,arm64,x64},osx-{arm64,x64},win-{arm64,x64,x86}})
+rids=()
 
 release () {
   local content="$1"
@@ -124,22 +124,25 @@ versionAtLeast () {
 # with every new major .NET release.
 aspnetcore_packages () {
   local version=$1
-  local pkgs=(
-    Microsoft.AspNetCore.App.Ref
-  )
+  local pkgs=()
 
-  if versionAtLeast "$version" 10; then
-    pkgs+=(
-      Microsoft.AspNetCore.App.Internal.Assets
-    )
+  if [[ -z "$vmr_bootstrap" ]]; then
+     pkgs+=(
+       Microsoft.AspNetCore.App.Ref
+     )
+
+    if versionAtLeast "$version" 10; then
+      pkgs+=(
+        Microsoft.AspNetCore.App.Internal.Assets
+      )
+    fi
   fi
 
   generate_package_list "$version" '    ' "${pkgs[@]}"
 }
 
 aspnetcore_target_packages () {
-  local version=$1
-  local rid=$2
+  local version=$1 rid=$2
   local pkgs=(
     "Microsoft.AspNetCore.App.Runtime.$rid"
   )
@@ -149,23 +152,27 @@ aspnetcore_target_packages () {
 
 netcore_packages () {
   local version=$1
-  local pkgs=(
-    Microsoft.NETCore.DotNetAppHost
-    Microsoft.NETCore.App.Ref
-  )
+  local pkgs=()
 
-  if ! versionAtLeast "$version" 9; then
+  if [[ -z "$vmr_bootstrap" ]]; then
     pkgs+=(
-      Microsoft.NETCore.DotNetHost
-      Microsoft.NETCore.DotNetHostPolicy
-      Microsoft.NETCore.DotNetHostResolver
+      Microsoft.NETCore.DotNetAppHost
+      Microsoft.NETCore.App.Ref
     )
-  fi
 
-  if versionAtLeast "$version" 7; then
-    pkgs+=(
-      Microsoft.DotNet.ILCompiler
-    )
+    if ! versionAtLeast "$version" 9; then
+      pkgs+=(
+        Microsoft.NETCore.DotNetHost
+        Microsoft.NETCore.DotNetHostPolicy
+        Microsoft.NETCore.DotNetHostResolver
+      )
+    fi
+
+    if versionAtLeast "$version" 7; then
+      pkgs+=(
+        Microsoft.DotNet.ILCompiler
+      )
+    fi
   fi
 
   if versionAtLeast "$version" 8; then
@@ -178,65 +185,81 @@ netcore_packages () {
 }
 
 netcore_host_packages () {
-  local version=$1
-  local rid=$2
+  local version=$1 rid=$2
   local pkgs=(
     "Microsoft.NETCore.App.Crossgen2.$rid"
   )
 
-  local min_ilcompiler=
-  case "$rid" in
-    linux-musl-arm) ;;
-    linux-arm) ;;
-    win-x86) ;;
-    osx-arm64) min_ilcompiler=8 ;;
-    *) min_ilcompiler=7 ;;
-  esac
+  if [[ -n "$vmr_bootstrap" ]]; then
+    if versionAtLeast "$version" 9; then
+      pkgs+=(
+        "runtime.$rid.Microsoft.NETCore.ILAsm"
+        "runtime.$rid.Microsoft.NETCore.ILDAsm"
+        "runtime.$rid.Microsoft.DotNet.ILCompiler"
+      )
+    fi
+  else
+    local min_ilcompiler=
+    case "$rid" in
+      linux-musl-arm) ;;
+      linux-arm) ;;
+      win-x86) ;;
+      osx-arm64) min_ilcompiler=8 ;;
+      *) min_ilcompiler=7 ;;
+    esac
 
-  if [[ -n "$min_ilcompiler" ]] && versionAtLeast "$version" "$min_ilcompiler"; then
-    pkgs+=(
-      "runtime.$rid.Microsoft.DotNet.ILCompiler"
-    )
+    if [[ -n "$min_ilcompiler" ]] && versionAtLeast "$version" "$min_ilcompiler"; then
+      pkgs+=(
+        "runtime.$rid.Microsoft.DotNet.ILCompiler"
+      )
+    fi
   fi
 
   generate_package_list "$version" '      ' "${pkgs[@]}"
 }
 
 netcore_target_packages () {
-  local version=$1
-  local rid=$2
-  local pkgs=(
-    "Microsoft.NETCore.App.Host.$rid"
-    "Microsoft.NETCore.App.Runtime.$rid"
-    "runtime.$rid.Microsoft.NETCore.DotNetAppHost"
-  )
+  local version=$1 rid=$2
+  local pkgs=()
 
-  if ! versionAtLeast "$version" 9; then
+  if [[ -n "$vmr_bootstrap" ]]; then
     pkgs+=(
-      "runtime.$rid.Microsoft.NETCore.DotNetHost"
-      "runtime.$rid.Microsoft.NETCore.DotNetHostPolicy"
-      "runtime.$rid.Microsoft.NETCore.DotNetHostResolver"
+      "Microsoft.NETCore.App.Runtime.$rid"
     )
-    case "$rid" in
-      linux-musl-arm*) ;;
-      win-arm64) ;;
-      *) pkgs+=(
-           "Microsoft.NETCore.App.Runtime.Mono.$rid"
-         ) ;;
-    esac
-  fi
+  else
+    pkgs+=(
+      "Microsoft.NETCore.App.Host.$rid"
+      "Microsoft.NETCore.App.Runtime.$rid"
+      "runtime.$rid.Microsoft.NETCore.DotNetAppHost"
+    )
 
-  if versionAtLeast "$version" 10; then
-    pkgs+=(
-      "Microsoft.NETCore.App.Runtime.NativeAOT.$rid"
-    )
+    if ! versionAtLeast "$version" 9; then
+      pkgs+=(
+        "runtime.$rid.Microsoft.NETCore.DotNetHost"
+        "runtime.$rid.Microsoft.NETCore.DotNetHostPolicy"
+        "runtime.$rid.Microsoft.NETCore.DotNetHostResolver"
+      )
+      case "$rid" in
+        linux-musl-arm*) ;;
+        win-arm64) ;;
+        *) pkgs+=(
+             "Microsoft.NETCore.App.Runtime.Mono.$rid"
+           ) ;;
+      esac
+    fi
+
+    if versionAtLeast "$version" 10; then
+      pkgs+=(
+        "Microsoft.NETCore.App.Runtime.NativeAOT.$rid"
+      )
+    fi
   fi
 
   generate_package_list "$version" '      ' "${pkgs[@]}"
 }
 
 usage () {
-  echo "Usage: $pname [[--sdk] [-o output] sem-version] ...
+  echo "Usage: $pname [[--vmr-bootstrap] [--sdk] [-o output] sem-version] ...
 Get updated dotnet src (platform - url & sha512) expressions for specified versions
 
 Exit codes:
@@ -251,8 +274,7 @@ Examples:
 }
 
 update() {
-  local -r sem_version=$1 sdk=$2
-  local output=$3
+  local -r sem_version=$1
 
   local patch_specified=false
   # Check if a patch was specified as an argument.
@@ -274,7 +296,7 @@ update() {
   local major_minor content major_minor_patch
   major_minor=$(sed 's/^\([0-9]*\.[0-9]*\).*$/\1/' <<< "$sem_version")
   content=$(curl -fsSL https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/"$major_minor"/releases.json)
-  if [[ -n $sdk ]]; then
+  if [[ -n $sdk_only ]]; then
     trap '' ERR
     major_minor_patch=$(
       jq -er --arg version "$sem_version" '
@@ -294,7 +316,7 @@ update() {
   aspnetcore_version=$(jq -er '."aspnetcore-runtime".version' <<< "$release_content")
   runtime_version=$(jq -er '.runtime.version' <<< "$release_content")
 
-  if [[ -n $sdk ]]; then
+  if [[ -n $sdk_only ]]; then
     sdk_versions=("$sem_version")
   else
     mapfile -t sdk_versions < <(jq -er '.sdks[] | .version' <<< "$release_content" | sort -rn)
@@ -318,6 +340,12 @@ update() {
       echo "Nothing to update."
       return
     fi
+  fi
+
+  if [[ -n "$vmr_bootstrap" ]]; then
+    rids=({linux-{arm64,x64},osx-{arm64,x64}})
+  else
+    rids=({linux-{,musl-}{arm,arm64,x64},osx-{arm64,x64},win-{arm64,x64,x86}})
   fi
 
   local aspnetcore_files runtime_files
@@ -401,7 +429,7 @@ in rec {
   };"
     done
 
-    if [[ -n $sdk ]]; then
+    if [[ -n $sdk_only ]]; then
       echo "
   sdk = sdk_$major_minor_underscore;
 "
@@ -419,17 +447,22 @@ in rec {
 }
 
 main () {
-  local pname sdk output
+  local pname
   pname=$(basename "$0")
 
-  sdk=
+  vmr_bootstrap=
+  sdk_only=
   output=
 
   while [ $# -gt 0 ]; do
     case $1 in
+      --vmr-bootstrap)
+        shift
+        vmr_bootstrap=1
+        ;;
       --sdk)
         shift
-        sdk=1
+        sdk_only=1
         ;;
       -o)
         shift
@@ -437,7 +470,8 @@ main () {
         shift
         ;;
       *)
-        update "$1" "$sdk" "$output"
+        update "$1"
+        output=
         shift
         ;;
     esac

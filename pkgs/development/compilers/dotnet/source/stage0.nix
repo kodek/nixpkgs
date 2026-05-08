@@ -66,9 +66,12 @@ let
         '';
 
         postConfigure = old.postConfigure or "" + ''
-          [[ ! -v prebuiltPackages ]] || \
-            ln -sf "$prebuiltPackages"/share/nuget/source/*/*/*.nupkg prereqs/packages/prebuilt/
-          ln -sf "${sdkPackages}"/share/nuget/source/*/*/*.nupkg prereqs/packages/prebuilt/
+          (
+            shopt -s nullglob
+            [[ ! -v prebuiltPackages ]] || \
+              ln -sf "$prebuiltPackages"/share/nuget/source/*/*/*.nupkg prereqs/packages/prebuilt/
+            ln -sf "${sdkPackages}"/share/nuget/source/*/*/*.nupkg prereqs/packages/prebuilt/
+          )
         '';
 
         buildFlags =
