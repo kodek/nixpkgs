@@ -97,7 +97,7 @@ stdenv.mkDerivation (finalAttrs: {
     ];
 
   meta = {
-    description = "Enhanched SDL-based port of Wolfenstein 3D for various platforms";
+    description = "Advanced source port for Wolfenstein 3D, Spear of Destiny, and Super 3D Noah's Ark";
     mainProgram = "ecwolf";
     homepage = "https://maniacsvault.net/ecwolf/";
     license = lib.licenses.gpl2Plus;
