@@ -103,6 +103,7 @@ stdenv.mkDerivation (finalAttrs: {
     license = lib.licenses.gpl2Plus;
     maintainers = with lib.maintainers; [
       jayman2000
+      keenanweaver
     ];
     platforms = lib.platforms.all;
   };
