@@ -14522,6 +14522,10 @@ self: super: with self; {
 
   pyobjc-framework-Cocoa = callPackage ../development/python-modules/pyobjc-framework-Cocoa { };
 
+  pyobjc-framework-CoreAudio =
+    callPackage ../development/python-modules/pyobjc-framework-CoreAudio
+      { };
+
   pyobjc-framework-CoreBluetooth =
     callPackage ../development/python-modules/pyobjc-framework-CoreBluetooth
       { };
