@@ -14,10 +14,21 @@ let
   check = config.node.pkgs.testers.lycheeLinkCheck {
     site = sitePkg;
   };
+  checkJson = config.node.pkgs.testers.lycheeLinkCheck {
+    site = sitePkg;
+    extraArgs = [
+      "--format"
+      "json"
+    ];
+  };
 in
 {
   name = "testers-lychee-link-check-run";
-  nodes.client = { ... }: { };
+  nodes.client =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.jq ];
+    };
   nodes.example = {
     networking.firewall.allowedTCPPorts = [ 80 ];
     services.nginx = {
@@ -67,5 +78,13 @@ in
     client.succeed("""
         ${lib.getExe check.online}
     """)
+
+    # EXTRA ARGS CASE: verify extraArgs are passed through to online wrapper
+
+    with subtest("extraArgs are passed to the online wrapper"):
+        client.succeed("""
+            ${lib.getExe checkJson.online} --output /tmp/lychee.json
+            jq -e .total /tmp/lychee.json
+        """)
   '';
 }
