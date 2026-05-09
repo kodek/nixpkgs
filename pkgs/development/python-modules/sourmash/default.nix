@@ -2,6 +2,7 @@
   lib,
   fetchPypi,
   buildPythonPackage,
+  pythonAtLeast,
   stdenv,
   rustPlatform,
   rocksdb_9_10,
@@ -74,6 +75,16 @@ buildPythonPackage rec {
     "test_compare_no_such_file"
     "test_do_sourmash_index_multiscaled_rescale_fail"
     "test_metagenome_kreport_out_fail"
+  ]
+  ++ lib.optionals (pythonAtLeast "3.14") [
+    # argparse subparser usage prefix changed in 3.14
+    "test_cmd_3"
+  ]
+  ++ lib.optionals (stdenv.hostPlatform.isDarwin && stdenv.hostPlatform.isAarch64) [
+    # rocksdb segfaults pytest workers
+    "rocksdb"
+    "disk_revindex"
+    "create_dataset_picklist"
   ];
 
   meta = {
