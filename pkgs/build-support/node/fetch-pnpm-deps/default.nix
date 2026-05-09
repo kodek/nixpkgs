@@ -87,6 +87,7 @@ in
               moreutils
               pnpm # from args
               pnpm-fixup-state-db'
+              writableTmpDirAsHomeHook
               yq
               zstd
             ]
@@ -103,8 +104,6 @@ in
                 echo "ERROR: lockfileVersion $lockfileVersion in pnpm-lock.yaml is too new for the provided pnpm version ${lib.versions.major pnpm.version}!"
                 exit 1
               fi
-
-              export HOME=$(mktemp -d)
 
               # For fetcherVersion < 3, the pnpm store files are placed directly into $out.
               # For fetcherVersion >= 3, it is bundled into a compressed tarball within $out,
