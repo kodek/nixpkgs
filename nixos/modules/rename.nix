@@ -510,6 +510,9 @@ in
     (mkRemovedOptionModule [ "services" "xtreemfs" ] ''
       services.xtreemfs has been removed as it was broken and unmaintained upstream
     '')
+    (mkRemovedOptionModule [ "services" "xserver" "cmt" ] ''
+      services.xserver.cmt has been removed as it was broken and unmaintained upstream
+    '')
     # Do NOT add any option renames here, see top of the file
   ];
 }
