@@ -40,6 +40,7 @@ let
     }:
     stdenv.mkDerivation (finalAttrs: {
       name = "lychee-link-check";
+      __structuredAttrs = true;
       inherit site;
       nativeBuildInputs = [
         finalAttrs.passthru.lychee
