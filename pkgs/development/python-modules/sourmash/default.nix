@@ -4,6 +4,7 @@
   buildPythonPackage,
   stdenv,
   rustPlatform,
+  rocksdb_9_10,
   bitstring,
   cachetools,
   cffi,
@@ -18,6 +19,9 @@
   pyyaml,
   pytestCheckHook,
 }:
+let
+  rocksdb = rocksdb_9_10;
+in
 buildPythonPackage rec {
   pname = "sourmash";
   version = "4.9.4";
@@ -40,6 +44,11 @@ buildPythonPackage rec {
   ];
 
   buildInputs = [ iconv ];
+
+  env = {
+    ROCKSDB_INCLUDE_DIR = "${rocksdb}/include";
+    ROCKSDB_LIB_DIR = "${rocksdb}/lib";
+  };
 
   propagatedBuildInputs = [
     bitstring
