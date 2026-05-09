@@ -250,6 +250,14 @@ let
     );
   gccArchFeature = [ "gccarch-${buildPlatform.gcc.arch}" ];
 
+  cachedOutputChecks = {
+    out = { };
+  };
+  debugCachedOutputChecks = {
+    out = { };
+    debug = { };
+  };
+
   # Turn a derivation into its outPath without a string context attached.
   # See the comment at the usage site.
   unsafeDerivationToUntrackedOutpath =
@@ -784,10 +792,7 @@ let
               && !attrs ? outputChecks
               && (attrsOutputChecks == { } || attrsOutputChecksFiltered == { })
             then
-              {
-                out = { };
-                ${if separateDebugInfo' then "debug" else null} = { };
-              }
+              if separateDebugInfo' then debugCachedOutputChecks else cachedOutputChecks
             else
               builtins.listToAttrs (
                 map (name: {
