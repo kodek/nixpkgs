@@ -230,11 +230,7 @@ let
   isSingularDependency = dep: dep == null || isDerivation dep || isString dep || isPath dep;
 
   canExecuteHostOnBuild = buildPlatform.canExecute hostPlatform;
-  defaultHardeningFlags =
-    if stdenvHasCC then
-      (stdenv.cc.defaultHardeningFlags or knownHardeningFlags)
-    else
-      knownHardeningFlags;
+  defaultHardeningFlags = stdenv.cc.defaultHardeningFlags or knownHardeningFlags;
   hostSuffixNecessary = hostPlatform != buildPlatform && stdenvHasCC;
   stdenvHostSuffix = "-${hostPlatform.config}";
   stdenvStaticMarker = optionalString isStatic "-static";
