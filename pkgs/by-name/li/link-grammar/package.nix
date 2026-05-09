@@ -38,15 +38,27 @@ let
 
     buildInputs = [
       libedit
-      pcre2
       sqlite
+    ]
+    ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [
+      pcre2
     ];
 
     configureFlags = [
       "--disable-java-bindings"
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
+      # multi-dict and multi-threads crash when built with pcre2
+      # https://github.com/opencog/link-grammar/issues/1514
+      "--disable-pcre2"
     ];
 
-    doCheck = true;
+    preCheck = lib.optionalString stdenv.hostPlatform.isDarwin ''
+      export DYLD_LIBRARY_PATH=$(pwd)/link-grammar/.libs
+    '';
+
+    # multi-dict test randomly fails on x86_64-darwin
+    doCheck = stdenv.hostPlatform.system != "x86_64-darwin";
 
     passthru.tests = {
       quick =
