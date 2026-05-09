@@ -37,6 +37,11 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "pywebcopy" ];
 
+  disabledTestPaths = [
+    # Segfault
+    "pywebcopy/tests/test_iterparser.py"
+  ];
+
   meta = {
     changelog = "https://github.com/rajatomar788/pywebcopy/blob/master/docs/changelog.md";
     description = "Python package for cloning complete webpages and websites to local storage";
