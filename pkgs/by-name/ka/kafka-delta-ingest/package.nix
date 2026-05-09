@@ -40,6 +40,9 @@ rustPlatform.buildRustPackage {
     rdkafka
   ];
 
+  # #![deny(warnings)] breaks the build when newer rustc emits new lints.
+  env.RUSTFLAGS = "--cap-lints warn";
+
   cargoLock = {
     lockFile = ./Cargo.lock;
   };
