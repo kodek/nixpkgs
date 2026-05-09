@@ -54,10 +54,12 @@ perlPackages.buildPerlPackage rec {
       thunze
       mfairley
     ];
-    license = [
-      lib.licenses.postgresql
-      lib.licenses.artistic2
-    ];
+    license =
+      with lib.licenses;
+      AND [
+        postgresql
+        artistic2
+      ];
     mainProgram = "pg_format";
   };
 }
