@@ -18,7 +18,6 @@
   libxfixes,
   libxtst,
   libglvnd,
-  mesa,
   wayland,
   libxkbcommon,
   glib,
@@ -71,7 +70,6 @@ buildDotnetModule rec {
     libxtst
     glib
     libglvnd
-    mesa
     wayland
     libxkbcommon
   ];
