@@ -27,6 +27,8 @@ buildPythonPackage rec {
     prometheus-client
   ];
 
+  __darwinAllowLocalNetworking = true;
+
   nativeCheckInputs = [ pytestCheckHook ];
 
   enabledTestPaths = [ "tests/" ];
