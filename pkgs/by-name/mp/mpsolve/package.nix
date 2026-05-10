@@ -12,6 +12,8 @@
   gtk3,
   pkg-config,
   libsForQt5,
+
+  withGUI ? true,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -46,13 +48,22 @@ stdenv.mkDerivation (finalAttrs: {
     bison
     flex
     pkg-config
+  ]
+  ++ lib.optionals withGUI [
     libsForQt5.wrapQtAppsHook
   ];
 
   buildInputs = [
     gmp
+  ]
+  ++ lib.optionals withGUI [
     gtk3
     libsForQt5.qtbase
+  ];
+
+  configureFlags = [
+    (lib.enableFeature withGUI "graphical-debugger")
+    (lib.enableFeature withGUI "ui")
   ];
 
   enableParallelBuilding = true;
