@@ -53,7 +53,10 @@ buildGoModule (finalAttrs: {
     changelog = "https://github.com/Foxboron/ssh-tpm-agent/releases/tag/v${finalAttrs.version}";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [ sgo ];
+    maintainers = with lib.maintainers; [
+      sgo
+      defelo
+    ];
     mainProgram = "ssh-tpm-agent";
   };
 })
