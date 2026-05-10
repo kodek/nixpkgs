@@ -56,8 +56,8 @@ buildPythonPackage rec {
     })
     # Fix test_help under python 3.14 argparse colored output.
     (fetchpatch2 {
-      url = "https://github.com/labgrid-project/labgrid/commit/417ace60b9dc043767afb312113a02bcb0807b17.patch";
-      hash = "sha256-72nMGSVnKc7hq1B3EukbqOjMSj9xcXpu1eOlXnMUo1w=";
+      url = "https://github.com/labgrid-project/labgrid/commit/417ace60b9dc043767afb312113a02bcb0807b17.patch?full_index=1";
+      hash = "sha256-QCkO/PQbosqUldzJiOyF6BHvyzZI06CGs9IxHPPa6Ek=";
     })
   ];
 
@@ -104,6 +104,9 @@ buildPythonPackage rec {
     "test_argument_device_expansion"
     "test_argument_file_expansion"
     "test_local_managedfile"
+
+    # flaky: teardown race on x86_64-linux
+    "test_remoteplace_target"
   ];
 
   pytestFlags = [ "--benchmark-disable" ];
