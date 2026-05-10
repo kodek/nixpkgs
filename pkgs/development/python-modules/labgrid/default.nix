@@ -4,6 +4,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   fetchpatch,
+  fetchpatch2,
   grpcio,
   grpcio-tools,
   grpcio-reflection,
@@ -52,6 +53,11 @@ buildPythonPackage rec {
     (fetchpatch {
       url = "https://github.com/Emantor/labgrid/commit/f0b672afe1e8976c257f0adff9bf6e7ee9760d6f.patch";
       sha256 = "sha256-M7rg+W9SjWDdViWyWe3ERzbUowxzf09c4w1yG3jQGak=";
+    })
+    # Fix test_help under python 3.14 argparse colored output.
+    (fetchpatch2 {
+      url = "https://github.com/labgrid-project/labgrid/commit/417ace60b9dc043767afb312113a02bcb0807b17.patch";
+      hash = "sha256-72nMGSVnKc7hq1B3EukbqOjMSj9xcXpu1eOlXnMUo1w=";
     })
   ];
 
