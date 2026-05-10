@@ -34,6 +34,8 @@ buildPythonPackage rec {
   disabledTests = [
     # AssertionError
     "test_group_by_lambda_is_not_supported"
+    # prometheus-client 0.24 moved CONTENT_TYPE_LATEST to version=1.0.0 while choose_encoder still defaults to 0.0.4
+    "test_default_format"
   ];
 
   meta = {
