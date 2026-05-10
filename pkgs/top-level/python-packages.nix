@@ -15295,6 +15295,8 @@ self: super: with self; {
 
   pytelegrambotapi = callPackage ../development/python-modules/pyTelegramBotAPI { };
 
+  pyteleinfo = callPackage ../development/python-modules/pyteleinfo { };
+
   pytenable = callPackage ../development/python-modules/pytenable { };
 
   pytensor = callPackage ../development/python-modules/pytensor { };
