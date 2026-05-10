@@ -74,6 +74,8 @@ buildPythonPackage rec {
     "test_encrypted_socket"
   ];
 
+  __darwinAllowLocalNetworking = true;
+
   pythonImportsCheck = [ "pytds" ];
 
   meta = {
