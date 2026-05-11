@@ -19,6 +19,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     hash = "sha256-3owl4M4vRyzjR4v74clyAxpNDu77rieSpYAVYfADHzY=";
   };
 
+  __structuredAttrs = true;
+
   nativeBuildInputs = [ just ];
 
   justFlags = [
