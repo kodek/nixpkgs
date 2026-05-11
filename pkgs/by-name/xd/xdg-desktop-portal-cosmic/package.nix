@@ -32,6 +32,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
   separateDebugInfo = true;
   strictDeps = true;
 
+  __structuredAttrs = true;
+
   nativeBuildInputs = [
     libcosmicAppHook
     rustPlatform.bindgenHook
