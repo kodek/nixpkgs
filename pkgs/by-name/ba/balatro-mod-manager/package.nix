@@ -101,7 +101,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
     homepage = "https://balatro-mod-manager.dasguney.com/";
     license = lib.licenses.gpl3Plus;
     platforms = lib.intersectLists lib.platforms.linux (lib.platforms.x86_64 ++ lib.platforms.aarch64);
-    maintainers = with lib.maintainers; [ mhdask ];
+    maintainers = with lib.maintainers; [
+      mhdask
+      ryand56
+    ];
     mainProgram = "BMM";
   };
 })
