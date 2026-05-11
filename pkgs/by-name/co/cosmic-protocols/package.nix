@@ -19,6 +19,7 @@ stdenv.mkDerivation {
   };
 
   __structuredAttrs = true;
+  strictDeps = true;
 
   makeFlags = [ "PREFIX=${placeholder "out"}" ];
   nativeBuildInputs = [ wayland-scanner ];
