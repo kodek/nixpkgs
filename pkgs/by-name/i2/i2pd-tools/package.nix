@@ -44,7 +44,10 @@ stdenv.mkDerivation {
     description = "Toolsuite to work with keys and eepsites";
     homepage = "https://github.com/PurpleI2P/i2pd-tools";
     license = lib.licenses.bsd3;
-    maintainers = with lib.maintainers; [ MulliganSecurity ];
+    maintainers = with lib.maintainers; [
+      MulliganSecurity
+      ryand56
+    ];
     platforms = lib.platforms.linux;
   };
 }
