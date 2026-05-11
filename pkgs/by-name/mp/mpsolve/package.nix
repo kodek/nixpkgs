@@ -5,6 +5,7 @@
   fetchpatch,
   autoreconfHook,
   bison,
+  check,
   flex,
   gitUpdater,
   gmp,
@@ -55,6 +56,12 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   enableParallelBuilding = true;
+
+  doCheck = true;
+
+  checkInputs = [ check ];
+
+  checkTarget = "check";
 
   passthru.updateScript = gitUpdater { };
 
