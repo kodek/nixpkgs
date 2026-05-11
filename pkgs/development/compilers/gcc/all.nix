@@ -9,7 +9,7 @@
   isl_0_20,
   noSysDirs,
   wrapCC,
-}@args:
+}:
 
 let
   versions = import ./versions.nix;
