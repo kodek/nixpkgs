@@ -27299,6 +27299,12 @@
     githubId = 79593869;
     name = "Gramdalf";
   };
+  therealhammer = {
+    email = "thierry.hammer@googlemail.com";
+    github = "therealhammer";
+    githubId = 32392096;
+    name = "Thierry Hammer";
+  };
   therealr5 = {
     email = "rouven@rfive.de";
     github = "rouven0";
