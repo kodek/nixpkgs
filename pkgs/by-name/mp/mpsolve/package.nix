@@ -17,6 +17,12 @@ stdenv.mkDerivation (finalAttrs: {
   pname = "mpsolve";
   version = "3.2.2";
 
+  outputs = [
+    "out"
+    "dev"
+    "man"
+  ];
+
   src = fetchFromGitHub {
     owner = "robol";
     repo = "MPSolve";
@@ -32,6 +38,8 @@ stdenv.mkDerivation (finalAttrs: {
     })
   ];
 
+  strictDeps = true;
+
   nativeBuildInputs = [
     autoreconfHook
     bison
@@ -45,6 +53,8 @@ stdenv.mkDerivation (finalAttrs: {
     gtk3
     libsForQt5.qtbase
   ];
+
+  enableParallelBuilding = true;
 
   passthru.updateScript = gitUpdater { };
 
