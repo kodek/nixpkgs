@@ -22907,12 +22907,12 @@ final: prev: {
     pname = "vim-polyglot";
     version = "4.17.1-unstable-2025-08-27";
     src = fetchFromGitHub {
-      owner = "sheerun";
+      owner = "vim-polyglot";
       repo = "vim-polyglot";
       rev = "f061eddb7cdcc614c8406847b2bfb53099832a4e";
       hash = "sha256-GcJRChc2cVXz6U1q4z3RmWnlpGllD4KiQ66U3uA/dg8=";
     };
-    meta.homepage = "https://github.com/sheerun/vim-polyglot/";
+    meta.homepage = "https://github.com/vim-polyglot/vim-polyglot/";
     meta.license = unfree;
     meta.hydraPlatforms = [ ];
   };
