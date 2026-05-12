@@ -19891,20 +19891,6 @@ final: prev: {
     meta.hydraPlatforms = [ ];
   };
 
-  vim-csharp = buildVimPlugin {
-    pname = "vim-csharp";
-    version = "0-unstable-2017-03-29";
-    src = fetchFromGitHub {
-      owner = "OrangeT";
-      repo = "vim-csharp";
-      rev = "b5982fc69bba7d507638a308d6875b031054280d";
-      hash = "sha256-ndFo3mG0UoMK3KyPoHj1L0+6p5aHG5hnJsuMtrEfTps=";
-    };
-    meta.homepage = "https://github.com/OrangeT/vim-csharp/";
-    meta.license = unfree;
-    meta.hydraPlatforms = [ ];
-  };
-
   vim-css-color = buildVimPlugin {
     pname = "vim-css-color";
     version = "0-unstable-2024-10-18";
