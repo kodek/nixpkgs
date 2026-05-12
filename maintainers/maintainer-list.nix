@@ -29793,6 +29793,12 @@
       { fingerprint = "34DB 8D31 F782 2B61 FF06  9503 8B5C 43DC 9105 2999"; }
     ];
   };
+  wrench-exile-legacy = {
+    email = "user@wrench-exile-legacy.site";
+    github = "wrench-exile-legacy";
+    githubId = 280737824;
+    name = "wrench";
+  };
   wrmilling = {
     name = "Winston R. Milling";
     email = "Winston@Milli.ng";
