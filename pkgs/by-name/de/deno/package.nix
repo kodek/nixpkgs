@@ -9,6 +9,7 @@
   protobuf,
   installShellFiles,
   makeBinaryWrapper,
+  versionCheckHook,
   librusty_v8 ? callPackage ./rusty-v8 { },
   libffi,
   sqlite,
@@ -234,12 +235,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
   '';
 
   doInstallCheck = canExecute;
-  installCheckPhase = lib.optionalString canExecute ''
-    runHook preInstallCheck
-    $out/bin/deno --help
-    $out/bin/deno --version | grep "deno ${finalAttrs.version}"
-    runHook postInstallCheck
-  '';
+  nativeInstallCheckInputs = [ versionCheckHook ];
 
   passthru = {
     updateScript = ./update.sh;
