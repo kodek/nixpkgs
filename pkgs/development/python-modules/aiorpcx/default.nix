@@ -52,6 +52,8 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "aiorpcx" ];
 
+  __darwinAllowLocalNetworking = true;
+
   meta = {
     description = "Transport, protocol and framing-independent async RPC client and server implementation";
     homepage = "https://github.com/kyuupichan/aiorpcX";
