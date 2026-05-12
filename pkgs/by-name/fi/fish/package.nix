@@ -2,6 +2,7 @@
   stdenv,
   lib,
   fetchFromGitHub,
+  buildPackages,
   coreutils,
   darwin,
   glibcLocales,
@@ -280,7 +281,7 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     rustc
     rustPlatform.cargoSetupHook
-    (python3.withPackages (ps: [
+    (buildPackages.python3.withPackages (ps: [
       ps.pexpect
       ps.sphinx
     ]))
