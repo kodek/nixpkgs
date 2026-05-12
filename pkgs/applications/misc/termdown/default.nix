@@ -1,33 +1,33 @@
 {
   lib,
   fetchFromGitHub,
-  buildPythonApplication,
-  click,
-  pyfiglet,
-  python-dateutil,
-  setuptools,
+  python3Packages,
 }:
 
-buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "termdown";
-  version = "1.18.0";
-  format = "setuptools";
+  version = "2.0.0";
+  pyproject = true;
 
   src = fetchFromGitHub {
     owner = "trehn";
     repo = "termdown";
     tag = version;
-    hash = "sha256-Hnk/MOYdbOl14fI0EFbIq7Hmc7TyhcZWGEg2/jmNJ5Y=";
+    hash = "sha256-G2YOAC+b++oQUicZcY28qVDy2XqW2SuzhXcVqeSQkh8=";
   };
 
-  dependencies = [
+  build-system = with python3Packages; [
+    hatchling
+  ];
+
+  dependencies = with python3Packages; [
+    art
+    pillow
     python-dateutil
-    click
-    pyfiglet
-    setuptools
   ];
 
   meta = {
+    changelog = "https://github.com/trehn/termdown/blob/${src.tag}/CHANGELOG.md";
     description = "Starts a countdown to or from TIMESPEC";
     mainProgram = "termdown";
     longDescription = "Countdown timer and stopwatch in your terminal";
