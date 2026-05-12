@@ -11579,13 +11579,6 @@ with pkgs;
 
   gap-full = lowPrio (gap.override { packageSet = "full"; });
 
-  maxima = callPackage ../applications/science/math/maxima {
-    lisp-compiler = sbcl;
-  };
-  maxima-ecl = maxima.override {
-    lisp-compiler = ecl;
-  };
-
   ### SCIENCE / MISC
 
   boinc-headless = boinc.override { headless = true; };
