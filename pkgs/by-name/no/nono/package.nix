@@ -13,7 +13,7 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "nono";
-  version = "0.43.1";
+  version = "0.53.0";
 
   __darwinAllowLocalNetworking = true; # required for tests
 
@@ -21,9 +21,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "always-further";
     repo = "nono";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-a9RwEbe0x49EyBSGX0mBk2GNeWmc6NhanExqbDyTM40=";
+    hash = "sha256-jK3/NDNQkeeCKP2iMIJMCq9lrDZ9ksiEnHhFmrz+gew=";
   };
-  cargoHash = "sha256-/+CfiWbg3anUbzgGigFxWs0+KavGEa2odo5kBF9c7Wg=";
+  cargoHash = "sha256-OK2vlXYFdjMHqzVR6ZoRn7WEfAUVATGhk32JLoDED5c=";
 
   nativeBuildInputs = [
     pkg-config
@@ -52,6 +52,27 @@ rustPlatform.buildRustPackage (finalAttrs: {
     # needs /bin/pwd
     "--skip=audit_verify_reports_signed_attestation_with_pinned_public_key"
     "--skip=rollback_signed_session_verifies_from_audit_dir_bundle"
+
+    # nono-cli
+    # wants a script `cripts/test-list-aliases.sh`, `git`, and `.git` history
+    "--skip=alias_inventory_script_passes"
+    # fails to initialize the sandbox under '/build'
+    "--skip=policy::tests::test_all_groups_no_deny_within_allow_overlap"
+    # not relevant for us, requires `git`
+    "--skip=lint_docs_script_passes"
+    # want to run `git`
+    "--skip=alias_inventory_rejects_marker_missing_field"
+    "--skip=alias_inventory_rejects_naked_serde_alias"
+    "--skip=alias_inventory_rejects_unapproved_deprecated_module_reach_in"
+    "--skip=lint_docs_accepts_clean_tree"
+    "--skip=lint_docs_rejects_quoted_override_deny_outside_allowlist"
+
+    # nono-proxy
+    # fails to prepare TLS bundle inside build sandbox
+    "--skip=server::tests::test_intercept_lifecycle_end_to_end"
+    "--skip=server::tests::test_route_diagnostics_summarises_each_route"
+    "--skip=tls_intercept::bundle::tests::bundle_contains_ephemeral_and_system_roots"
+    "--skip=tls_intercept::bundle::tests::bundle_file_has_restrictive_permissions"
   ]
   ++ lib.optionals stdenv.hostPlatform.isDarwin [
     # panics with "Deny-within-allow overlap on Linux ... Landlock cannot enforce this. ..."
