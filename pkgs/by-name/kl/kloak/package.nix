@@ -12,6 +12,7 @@
   libinput,
   wayland,
   libxkbcommon,
+  nix-update-script,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -54,6 +55,8 @@ stdenv.mkDerivation (finalAttrs: {
 
     runHook postInstall
   '';
+
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "Privacy tool for anonymizing keyboard and mouse use";
