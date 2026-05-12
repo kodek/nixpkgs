@@ -9,6 +9,7 @@
   gnused,
   gnugrep,
   gawk,
+  fish,
   man-db,
   ninja,
   getent,
@@ -287,6 +288,13 @@ stdenv.mkDerivation (finalAttrs: {
     ]))
     # Avoid warnings when building the manpages about HOME not being writable
     writableTmpDirAsHomeHook
+  ]
+  ++ lib.optionals (!stdenv.buildPlatform.canExecute stdenv.hostPlatform) [
+    # Building the docs ends up wanting to run fish_indent at build
+    # time, which obviously can't use a cross compiled fish_indent
+    # from this derivation. Pull in the build platform's fish to
+    # provide it.
+    fish
   ];
 
   buildInputs = [
