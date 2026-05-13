@@ -54,7 +54,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
   '';
 
   meta = {
-    homepage = "http://www.coderholic.com/pyradio/";
+    homepage = "https://github.com/coderholic/pyradio";
     description = "Curses based internet radio player";
     mainProgram = "pyradio";
     changelog = "https://github.com/coderholic/pyradio/releases/tag/${finalAttrs.src.tag}";
