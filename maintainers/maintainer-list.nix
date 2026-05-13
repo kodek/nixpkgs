@@ -29251,7 +29251,7 @@
     name = "Johannes Mayrhofer";
   };
   vuks = {
-    email = "vuks@allthingslinux.org";
+    email = "vuks@vuks.dev";
     github = "Vuks69";
     githubId = 51289041;
     name = "Vuks";
