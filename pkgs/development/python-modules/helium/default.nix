@@ -13,7 +13,7 @@
   stdenv,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage (finalAttrs: {
   pname = "helium";
   version = "7.0.1";
   pyproject = true;
@@ -21,17 +21,13 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "mherrmann";
     repo = "helium";
-    tag = "v${version}";
+    tag = "v${finalAttrs.version}";
     hash = "sha256-gIezXLVlPOpc5GY0eK7ua6TOiAlWV9/oGZQbimKnzjI=";
   };
 
-  build-system = [
-    setuptools
-  ];
+  build-system = [ setuptools ];
 
-  dependencies = [
-    selenium
-  ];
+  dependencies = [ selenium ];
 
   nativeCheckInputs = [
     firefox
@@ -59,15 +55,13 @@ buildPythonPackage rec {
     "tests/api/test_write.py"
   ];
 
-  pythonImportsCheck = [
-    "helium"
-  ];
+  pythonImportsCheck = [ "helium" ];
 
   meta = {
     description = "Lighter web automation with Python";
     homepage = "https://github.com/mherrmann/helium";
-    changelog = "https://github.com/mherrmann/helium/releases/tag/v${version}";
+    changelog = "https://github.com/mherrmann/helium/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.mit;
     teams = with lib.teams; [ ngi ];
   };
-}
+})
