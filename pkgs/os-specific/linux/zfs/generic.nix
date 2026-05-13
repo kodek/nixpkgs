@@ -102,13 +102,10 @@ let
 
       patches =
         extraPatches
-        ++
-          lib.optional
-            (kernel != null && lib.versionAtLeast version "2.4" && lib.versionOlder kernel.version "5.14")
-            (fetchpatch2 {
-              url = "https://github.com/openzfs/zfs/commit/58c8dc5f6926eb96903a3f38b141e8998ef9261b.patch?full_index=1";
-              hash = "sha256-eYkMhHsHBA9MKXnB/GuHpuv44g1SCGV5Or0InPBeNkU=";
-            });
+        ++ lib.optional (kernel != null && lib.versionOlder kernel.version "5.14") (fetchpatch2 {
+          url = "https://github.com/openzfs/zfs/commit/58c8dc5f6926eb96903a3f38b141e8998ef9261b.patch?full_index=1";
+          hash = "sha256-eYkMhHsHBA9MKXnB/GuHpuv44g1SCGV5Or0InPBeNkU=";
+        });
 
       postPatch =
         optionalString buildKernel ''
