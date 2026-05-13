@@ -58,7 +58,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     homepage = "https://github.com/zeroclaw-labs/zeroclaw";
     changelog = "https://github.com/zeroclaw-labs/zeroclaw/blob/${finalAttrs.src.tag}/CHANGELOG.md";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ drupol ];
+    maintainers = with lib.maintainers; [ nixosclaw ];
     mainProgram = "zeroclaw";
   };
 })
