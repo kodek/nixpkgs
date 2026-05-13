@@ -5545,6 +5545,12 @@
     githubId = 32609395;
     name = "B YI";
   };
+  coolcuber = {
+    email = "rpgeorg@clemson.edu";
+    github = "coolcuber";
+    githubId = 35880825;
+    name = "Ross George";
+  };
   coolGi = {
     email = "me@coolgi.dev";
     github = "coolGi69";
