@@ -54,7 +54,7 @@ let
     || (instance.token != null && instance.tokenFile == null);
 in
 {
-  meta.maintainers = [ ];
+  meta.maintainers = pkgs.gitea-actions-runner.meta.maintainers;
 
   options.services.gitea-actions-runner = with types; {
     package = mkPackageOption pkgs "gitea-actions-runner" { };
