@@ -2237,9 +2237,9 @@
   };
 
   regex = {
-    version = "0.25.0";
+    version = "1.0.0";
     url = "github:tree-sitter/tree-sitter-regex";
-    hash = "sha256-bR0K6SR19QuQwDUic+CJ69VQTSGqry5a5IOpPTVJFlo=";
+    hash = "sha256-3D+LOWRUamAdbegVfWD5yFcCjBucthPogOL/zWR78PY=";
     meta = {
       license = lib.licenses.mit;
     };
