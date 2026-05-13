@@ -23,6 +23,7 @@
   findutils,
   libiconv,
   removeReferencesTo,
+  zstd,
   rustSupport ? true,
   rustc,
   cargo,
@@ -44,8 +45,9 @@ llvmStdenv.mkDerivation (finalAttrs: {
     repo = "ClickHouse";
     tag = "v${finalAttrs.version}";
     fetchSubmodules = true;
-    name = "clickhouse-${tag}.tar.gz";
+    name = "clickhouse-${tag}.tar.zst";
     inherit hash;
+    nativeBuildInputs = [ zstd ];
     postFetch = ''
       # Delete files that make the source too big
       rm -rf $out/contrib/arrow/docs/
@@ -80,7 +82,7 @@ llvmStdenv.mkDerivation (finalAttrs: {
       # Compress to not exceed the 2GB output limit
       echo "Creating deterministic source tarball..."
 
-      tar -I 'gzip -n' \
+      tar -I 'zstd --no-progress' \
         --sort=name \
         --mtime=1970-01-01 \
         --owner=0 --group=0 \
@@ -103,6 +105,7 @@ llvmStdenv.mkDerivation (finalAttrs: {
     perl
     llvmPackages.lld
     removeReferencesTo
+    zstd
   ]
   ++ lib.optionals stdenv.hostPlatform.isx86_64 [
     nasm
