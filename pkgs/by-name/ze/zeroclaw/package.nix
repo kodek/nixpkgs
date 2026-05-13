@@ -14,13 +14,13 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "zeroclaw";
-  version = "0.5.1";
+  version = "0.7.5";
 
   src = fetchFromGitHub {
     owner = "zeroclaw-labs";
     repo = "zeroclaw";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-5P+TjAf7i0oUxBCyBtagrmIHPXW2iZ6620PNxVYYjlQ=";
+    hash = "sha256-hVHfsBw3u0CLWAbmizLA9ZrB+3B0qBIrSUuzsyChwW0=";
   };
 
   postPatch =
@@ -32,7 +32,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
       ln -s ${zeroclaw-web} web/dist
     '';
 
-  cargoHash = "sha256-tpgeRLWyye43fuzw2MRevQx8YKEbyOnIgLzjg8EzwCg=";
+  cargoHash = "sha256-6MGIJsaqRp3k/ysjdu6BE2iM2sehERQR+QoSqiThSpg=";
 
   nativeBuildInputs = [
     pkg-config
@@ -46,12 +46,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeCheckInputs = [
     writableTmpDirAsHomeHook
     gitMinimal
-  ];
-
-  checkFlags = [
-    "--skip=memory::lucid::tests::failure_cooldown_avoids_repeated_lucid_calls"
-    "--skip=memory::lucid::tests::recall_handles_lucid_cold_start_delay_within_timeout"
-    "--skip=memory::lucid::tests::recall_merges_lucid_and_local_results"
   ];
 
   doInstallCheck = true;
