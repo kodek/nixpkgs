@@ -3861,8 +3861,8 @@ let
         mktplcRef = {
           name = "ansible";
           publisher = "redhat";
-          version = "26.4.6";
-          hash = "sha256-ckirgCt6+mdnWkvmLwpH7YwqOxQ+JEeRE0/NJGCi7rU=";
+          version = "26.5.0";
+          hash = "sha256-gKe+LC0OOZi5I1Tei64JtQUR1gpWyTex9MoLGT6jgWU=";
         };
         meta = {
           description = "Ansible language support";
