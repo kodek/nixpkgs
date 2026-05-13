@@ -25,7 +25,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
     changelog = "https://github.com/dustinblackman/cargo-run-bin/blob/v${finalAttrs.version}/CHANGELOG.md";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [
-      mightyiam
       matthiasbeyer
     ];
   };
