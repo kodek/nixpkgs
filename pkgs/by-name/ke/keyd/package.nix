@@ -2,7 +2,6 @@
   stdenv,
   lib,
   fetchFromGitHub,
-  systemd,
   runtimeShell,
   python3Packages,
   nixosTests,
@@ -53,8 +52,6 @@ stdenv.mkDerivation {
   '';
 
   installFlags = [ "DESTDIR=${placeholder "out"}" ];
-
-  buildInputs = [ systemd ];
 
   nativeInstallCheckInputs = [ versionCheckHook ];
   doInstallCheck = true;
