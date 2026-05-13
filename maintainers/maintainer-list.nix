@@ -19823,6 +19823,12 @@
     name = "nixbitcoindev";
     keys = [ { fingerprint = "577A 3452 7F3E 2A85 E80F  E164 DD11 F9AD 5308 B3BA"; } ];
   };
+  nixosclaw = {
+    email = "github@nixclaw.io";
+    github = "nixosclaw";
+    githubId = 283803283;
+    name = "NixClaw";
+  };
   nixy = {
     email = "nixy@nixy.moe";
     github = "nixy";
