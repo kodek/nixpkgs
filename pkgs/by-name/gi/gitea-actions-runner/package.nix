@@ -44,6 +44,9 @@ buildGoModule (finalAttrs: {
     homepage = "https://gitea.com/gitea/runner";
     license = lib.licenses.mit;
     mainProgram = "gitea-runner";
-    maintainers = with lib.maintainers; [ techknowlogick ];
+    maintainers = with lib.maintainers; [
+      superherointj
+      techknowlogick
+    ];
   };
 })
