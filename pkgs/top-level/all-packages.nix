@@ -1426,8 +1426,6 @@ with pkgs;
     else
       throw "freshBootstrapTools: unknown hostPlatform ${stdenv.hostPlatform.config}";
 
-  crystfel = callPackage ../applications/science/physics/crystfel { };
-
   crystfel-headless = crystfel.override { withGui = false; };
 
   amule-daemon = amule.override {
@@ -2438,8 +2436,6 @@ with pkgs;
     callPackage ../tools/misc/graylog/plugins.nix { graylogPackage = graylog-6_0; }
   );
 
-  graphviz = callPackage ../tools/graphics/graphviz { };
-
   graphviz-nox = graphviz.override {
     withXorg = false;
   };
@@ -2744,7 +2740,6 @@ with pkgs;
     ;
   lerna = lerna_8;
 
-  libint = callPackage ../development/libraries/libint { };
   libintPsi4 = libint.override {
     enableFortran = false;
     enableSSE = false;
@@ -2817,8 +2812,6 @@ with pkgs;
 
   mcstatus = with python3Packages; toPythonApplication mcstatus;
 
-  miniupnpd = callPackage ../tools/networking/miniupnpd { };
-
   miniupnpd-nftables = miniupnpd.override { firewall = "nftables"; };
 
   mir-qualia = callPackage ../tools/text/mir-qualia {
@@ -2840,8 +2833,6 @@ with pkgs;
   };
 
   metasploit = callPackage ../tools/security/metasploit { };
-
-  mtr = callPackage ../tools/networking/mtr { };
 
   mtr-gui = mtr.override { withGtk = true; };
 
@@ -3329,8 +3320,6 @@ with pkgs;
   privoxy = callPackage ../tools/networking/privoxy {
     w3m = w3m-batch;
   };
-
-  tartube = callPackage ../applications/video/tartube { };
 
   tartube-yt-dlp = tartube.override {
     youtube-dl = yt-dlp;
@@ -4702,7 +4691,6 @@ with pkgs;
 
   ### DEVELOPMENT / INTERPRETERS
 
-  acl2 = callPackage ../development/interpreters/acl2 { };
   acl2-minimal = acl2.override { certifyBooks = false; };
 
   uiua-unstable = callPackage ../by-name/ui/uiua/package.nix { uiua_versionType = "unstable"; };
@@ -5714,8 +5702,6 @@ with pkgs;
     pname = "nexusmods-app-unfree";
     _7zz = _7zz-rar;
   };
-
-  nwjs = callPackage ../development/tools/nwjs { };
 
   nwjs-sdk = nwjs.override {
     sdk = true;
@@ -7087,8 +7073,6 @@ with pkgs;
 
   qdjango = libsForQt5.callPackage ../development/libraries/qdjango { };
 
-  quarto = callPackage ../development/libraries/quarto { };
-
   quartoMinimal = quarto.override {
     rWrapper = null;
     python3 = null;
@@ -8356,8 +8340,6 @@ with pkgs;
 
   i7z = qt5.callPackage ../os-specific/linux/i7z { };
 
-  ipu6-camera-hal = callPackage ../development/libraries/ipu6-camera-hal { };
-
   ipu6ep-camera-hal = ipu6-camera-hal.override {
     ipuVersion = "ipu6ep";
   };
@@ -8442,8 +8424,6 @@ with pkgs;
   linux-doc = callPackage ../os-specific/linux/kernel/htmldocs.nix { };
 
   cryptodev = linuxPackages.cryptodev;
-
-  librealsense = callPackage ../development/libraries/librealsense { };
 
   librealsenseWithCuda = librealsense.override {
     cudaSupport = true;
@@ -9550,8 +9530,6 @@ with pkgs;
     callPackages ../applications/graphics/inkscape/extensions.nix { }
   );
 
-  jabcode = callPackage ../development/libraries/jabcode { };
-
   jabcode-writer = jabcode.override {
     subproject = "writer";
   };
@@ -9819,8 +9797,6 @@ with pkgs;
 
   pinegrow6 = pinegrow.override { pinegrowVersion = "6"; };
 
-  pinegrow = callPackage ../applications/editors/pinegrow { };
-
   pipe-viewer = perlPackages.callPackage ../applications/video/pipe-viewer { };
 
   pleroma-bot = python3Packages.callPackage ../development/python-modules/pleroma-bot { };
@@ -9877,8 +9853,6 @@ with pkgs;
 
   muchsync = callPackage ../applications/networking/mailreaders/notmuch/muchsync.nix { };
 
-  nufraw = callPackage ../applications/graphics/nufraw { };
-
   nufraw-thumbnailer = nufraw.override {
     addThumbnailer = true;
   };
@@ -9924,8 +9898,6 @@ with pkgs;
   orpie = callPackage ../applications/misc/orpie {
     ocamlPackages = ocaml-ng.ocamlPackages_4_14;
   };
-
-  pantalaimon = callPackage ../applications/networking/instant-messengers/pantalaimon { };
 
   pantalaimon-headless = pantalaimon.override {
     enableDbusUi = false;
