@@ -11,7 +11,7 @@
   sensor-state-data,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage (finalAttrs: {
   pname = "thermopro-ble";
   version = "1.1.4";
   pyproject = true;
@@ -19,7 +19,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "bluetooth-devices";
     repo = "thermopro-ble";
-    tag = "v${version}";
+    tag = "v${finalAttrs.version}";
     hash = "sha256-goTJwTMaWBm5gc0/LOkjpKeRTkLStHkKJYsbE5Wj/X4=";
   };
 
@@ -42,8 +42,8 @@ buildPythonPackage rec {
   meta = {
     description = "Library for Thermopro BLE devices";
     homepage = "https://github.com/bluetooth-devices/thermopro-ble";
-    changelog = "https://github.com/Bluetooth-Devices/thermopro-ble/releases/tag/${src.tag}";
+    changelog = "https://github.com/Bluetooth-Devices/thermopro-ble/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ fab ];
   };
-}
+})
