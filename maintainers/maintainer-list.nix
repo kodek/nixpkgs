@@ -9503,6 +9503,11 @@
     name = "Faye Chun";
     keys = [ { fingerprint = "ACB8 DB1F E88D A908 6332  BDB1 5A71 B010 2FD7 3FC0"; } ];
   };
+  fxai = {
+    github = "fxai";
+    githubId = 44463990;
+    name = "fxai";
+  };
   fxfactorial = {
     email = "edgar.factorial@gmail.com";
     github = "fxfactorial";
