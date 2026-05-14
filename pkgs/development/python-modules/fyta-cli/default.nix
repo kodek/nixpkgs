@@ -11,7 +11,7 @@
   syrupy,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage (finalAttrs: {
   pname = "fyta-cli";
   version = "0.7.3";
   pyproject = true;
@@ -19,7 +19,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "dontinelli";
     repo = "fyta_cli";
-    tag = "v${version}";
+    tag = "v${finalAttrs.version}";
     hash = "sha256-+gPPECRMhhx7H+K3//PRH3ALyY2k6eQ/o9qAVHyyoes=";
   };
 
@@ -46,8 +46,8 @@ buildPythonPackage rec {
   meta = {
     description = "Module to access the FYTA API";
     homepage = "https://github.com/dontinelli/fyta_cli";
-    changelog = "https://github.com/dontinelli/fyta_cli/releases/tag/v${version}";
+    changelog = "https://github.com/dontinelli/fyta_cli/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [ fab ];
   };
-}
+})
