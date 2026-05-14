@@ -1796,6 +1796,12 @@
     matrix = "@andrewzah:matrix.abare.party";
     keys = [ { fingerprint = "D87B D9DC F11B ACD6 CDB4 0CB2 1373 2FB1 3E61 E0BE"; } ];
   };
+  andrinoff = {
+    name = "Drew Smirnoff";
+    email = "me@andrinoff.com";
+    github = "andrinoff";
+    githubId = 175145001;
+  };
   Andy3153 = {
     name = "Andrei Dobrete";
     email = "andy3153@protonmail.com";
