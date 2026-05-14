@@ -1428,7 +1428,7 @@ with pkgs;
 
   crystfel = callPackage ../applications/science/physics/crystfel { };
 
-  crystfel-headless = callPackage ../applications/science/physics/crystfel { withGui = false; };
+  crystfel-headless = crystfel.override { withGui = false; };
 
   amule-daemon = amule.override {
     monolithic = false;
@@ -1519,12 +1519,12 @@ with pkgs;
 
   pass = callPackage ../tools/security/pass { };
 
-  pass-nodmenu = callPackage ../tools/security/pass {
+  pass-nodmenu = pass.override {
     dmenuSupport = false;
     pass = pass-nodmenu;
   };
 
-  pass-wayland = callPackage ../tools/security/pass {
+  pass-wayland = pass.override {
     waylandSupport = true;
     pass = pass-wayland;
   };
@@ -2440,7 +2440,7 @@ with pkgs;
 
   graphviz = callPackage ../tools/graphics/graphviz { };
 
-  graphviz-nox = callPackage ../tools/graphics/graphviz {
+  graphviz-nox = graphviz.override {
     withXorg = false;
   };
 
@@ -2745,7 +2745,7 @@ with pkgs;
   lerna = lerna_8;
 
   libint = callPackage ../development/libraries/libint { };
-  libintPsi4 = callPackage ../development/libraries/libint {
+  libintPsi4 = libint.override {
     enableFortran = false;
     enableSSE = false;
     maxAm = 6;
@@ -2819,7 +2819,7 @@ with pkgs;
 
   miniupnpd = callPackage ../tools/networking/miniupnpd { };
 
-  miniupnpd-nftables = callPackage ../tools/networking/miniupnpd { firewall = "nftables"; };
+  miniupnpd-nftables = miniupnpd.override { firewall = "nftables"; };
 
   mir-qualia = callPackage ../tools/text/mir-qualia {
     pythonPackages = python3Packages;
@@ -2843,7 +2843,7 @@ with pkgs;
 
   mtr = callPackage ../tools/networking/mtr { };
 
-  mtr-gui = callPackage ../tools/networking/mtr { withGtk = true; };
+  mtr-gui = mtr.override { withGtk = true; };
 
   multitran = recurseIntoAttrs (
     let
@@ -3332,7 +3332,7 @@ with pkgs;
 
   tartube = callPackage ../applications/video/tartube { };
 
-  tartube-yt-dlp = callPackage ../applications/video/tartube {
+  tartube-yt-dlp = tartube.override {
     youtube-dl = yt-dlp;
   };
 
@@ -4703,7 +4703,7 @@ with pkgs;
   ### DEVELOPMENT / INTERPRETERS
 
   acl2 = callPackage ../development/interpreters/acl2 { };
-  acl2-minimal = callPackage ../development/interpreters/acl2 { certifyBooks = false; };
+  acl2-minimal = acl2.override { certifyBooks = false; };
 
   uiua-unstable = callPackage ../by-name/ui/uiua/package.nix { uiua_versionType = "unstable"; };
 
@@ -5717,7 +5717,7 @@ with pkgs;
 
   nwjs = callPackage ../development/tools/nwjs { };
 
-  nwjs-sdk = callPackage ../development/tools/nwjs {
+  nwjs-sdk = nwjs.override {
     sdk = true;
   };
 
@@ -6652,11 +6652,11 @@ with pkgs;
 
   libtorrent-rasterbar = libtorrent-rasterbar-2_0_x;
 
-  libubox-nossl = callPackage ../development/libraries/libubox { };
+  libubox-nossl = libubox.override { with_ustream_ssl = false; };
 
   libubox = callPackage ../development/libraries/libubox { with_ustream_ssl = true; };
 
-  libubox-mbedtls = callPackage ../development/libraries/libubox {
+  libubox-mbedtls = libubox.override {
     with_ustream_ssl = true;
     ustream-ssl = ustream-ssl-mbedtls;
   };
@@ -7089,7 +7089,7 @@ with pkgs;
 
   quarto = callPackage ../development/libraries/quarto { };
 
-  quartoMinimal = callPackage ../development/libraries/quarto {
+  quartoMinimal = quarto.override {
     rWrapper = null;
     python3 = null;
   };
@@ -8358,11 +8358,11 @@ with pkgs;
 
   ipu6-camera-hal = callPackage ../development/libraries/ipu6-camera-hal { };
 
-  ipu6ep-camera-hal = callPackage ../development/libraries/ipu6-camera-hal {
+  ipu6ep-camera-hal = ipu6-camera-hal.override {
     ipuVersion = "ipu6ep";
   };
 
-  ipu6epmtl-camera-hal = callPackage ../development/libraries/ipu6-camera-hal {
+  ipu6epmtl-camera-hal = ipu6-camera-hal.override {
     ipuVersion = "ipu6epmtl";
   };
 
@@ -8445,15 +8445,15 @@ with pkgs;
 
   librealsense = callPackage ../development/libraries/librealsense { };
 
-  librealsenseWithCuda = callPackage ../development/libraries/librealsense {
+  librealsenseWithCuda = librealsense.override {
     cudaSupport = true;
   };
 
-  librealsenseWithoutCuda = callPackage ../development/libraries/librealsense {
+  librealsenseWithoutCuda = librealsense.override {
     cudaSupport = false;
   };
 
-  librealsense-gui = callPackage ../development/libraries/librealsense {
+  librealsense-gui = librealsense.override {
     enableGUI = true;
   };
 
@@ -9552,11 +9552,11 @@ with pkgs;
 
   jabcode = callPackage ../development/libraries/jabcode { };
 
-  jabcode-writer = callPackage ../development/libraries/jabcode {
+  jabcode-writer = jabcode.override {
     subproject = "writer";
   };
 
-  jabcode-reader = callPackage ../development/libraries/jabcode {
+  jabcode-reader = jabcode.override {
     subproject = "reader";
   };
 
@@ -9817,7 +9817,7 @@ with pkgs;
 
   pijuice = with python3Packages; toPythonApplication pijuice;
 
-  pinegrow6 = callPackage ../applications/editors/pinegrow { pinegrowVersion = "6"; };
+  pinegrow6 = pinegrow.override { pinegrowVersion = "6"; };
 
   pinegrow = callPackage ../applications/editors/pinegrow { };
 
@@ -9879,7 +9879,7 @@ with pkgs;
 
   nufraw = callPackage ../applications/graphics/nufraw { };
 
-  nufraw-thumbnailer = callPackage ../applications/graphics/nufraw {
+  nufraw-thumbnailer = nufraw.override {
     addThumbnailer = true;
   };
 
@@ -9927,7 +9927,7 @@ with pkgs;
 
   pantalaimon = callPackage ../applications/networking/instant-messengers/pantalaimon { };
 
-  pantalaimon-headless = callPackage ../applications/networking/instant-messengers/pantalaimon {
+  pantalaimon-headless = pantalaimon.override {
     enableDbusUi = false;
   };
 
@@ -10086,7 +10086,7 @@ with pkgs;
   rke2 = rke2_stable;
 
   rofi-pass = callPackage ../tools/security/pass/rofi-pass.nix { };
-  rofi-pass-wayland = callPackage ../tools/security/pass/rofi-pass.nix {
+  rofi-pass-wayland = rofi-pass.override {
     backend = "wayland";
   };
 
