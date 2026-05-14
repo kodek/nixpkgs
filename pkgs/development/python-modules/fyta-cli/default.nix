@@ -13,14 +13,14 @@
 
 buildPythonPackage rec {
   pname = "fyta-cli";
-  version = "0.7.2";
+  version = "0.7.3";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "dontinelli";
     repo = "fyta_cli";
     tag = "v${version}";
-    hash = "sha256-YYH15ZuRZirSFC7No1goY/afk2BGtCCykcZAnCDdq7U=";
+    hash = "sha256-+gPPECRMhhx7H+K3//PRH3ALyY2k6eQ/o9qAVHyyoes=";
   };
 
   build-system = [ hatchling ];
