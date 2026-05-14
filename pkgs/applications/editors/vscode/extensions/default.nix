@@ -3707,6 +3707,8 @@ let
 
       oracle.oracle-java = callPackage ./oracle.oracle-java { };
 
+      oxc.oxc-vscode = callPackage ./oxc.oxc-vscode { };
+
       ph-hawkins.arc-plus = callPackage ./ph-hawkins.arc-plus { };
 
       phind.phind = buildVscodeMarketplaceExtension {
