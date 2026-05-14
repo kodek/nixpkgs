@@ -24,6 +24,7 @@ buildNpmPackage rec {
 
   env = {
     CYPRESS_INSTALL_BINARY = 0;
+    NEXT_PUBLIC_DASHBOARD_VERSION = version;
   };
 
   meta = {
