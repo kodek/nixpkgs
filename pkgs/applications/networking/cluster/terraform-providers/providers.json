@@ -1229,13 +1229,13 @@
     "vendorHash": "sha256-skswuFKhN4FFpIunbom9rM/FVRJVOFb1WwHeAIaEjn8="
   },
   "spacelift-io_spacelift": {
-    "hash": "sha256-oS3Ikmi5wUlVbQos16x1BXoqhgOMIGyJcpl7sIXmDtk=",
+    "hash": "sha256-m8l0fmDo8lFu8xIqO3tVD0vHIvgWSKVE7J6BxKm7LSY=",
     "homepage": "https://registry.terraform.io/providers/spacelift-io/spacelift",
     "owner": "spacelift-io",
     "repo": "terraform-provider-spacelift",
-    "rev": "v1.48.0",
+    "rev": "v1.49.0",
     "spdx": "MIT",
-    "vendorHash": "sha256-/4v25xY/fmfSAEALRbXu/a+x3nC1Ly/IJPOEKmYjgmw="
+    "vendorHash": "sha256-C8TE7uxMf6LOTS6v22mXwUdk2eqQRinwrCH4ZVUCx4k="
   },
   "splunk-terraform_signalfx": {
     "hash": "sha256-pzro0Uyu12u1pKy22GrZAktoTKngjn4h5mZpABqARk0=",
