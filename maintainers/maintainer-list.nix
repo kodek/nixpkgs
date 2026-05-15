@@ -8535,9 +8535,9 @@
     email = "evysgarden@protonmail.com";
   };
   ewok = {
-    email = "ewok@ewok.ru";
-    github = "ewok-old";
-    githubId = 454695;
+    email = "github@in.ewok.email";
+    github = "ewok";
+    githubId = 125148819;
     name = "Artur Taranchiev";
   };
   ewuuwe = {
