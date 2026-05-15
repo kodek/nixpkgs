@@ -16875,6 +16875,11 @@
     name = "Marcus";
     matrix = "@marker06:matrix.org";
   };
+  markhakansson = {
+    name = "Mark Håkansson";
+    github = "markhakansson";
+    githubId = 44841869;
+  };
   markus1189 = {
     email = "markus1189@gmail.com";
     github = "markus1189";
