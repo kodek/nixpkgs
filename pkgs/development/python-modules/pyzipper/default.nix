@@ -10,14 +10,14 @@
 
 buildPythonPackage rec {
   pname = "pyzipper";
-  version = "0.3.6";
+  version = "0.4.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "danifus";
     repo = "pyzipper";
     tag = "v${version}";
-    hash = "sha256-+fZXoAUeB/bUI3LrIFlMTktJgn+GNFBiDHvH2Jgo0pg=";
+    hash = "sha256-an+DmsyoIAwYvYXGFnJ/3+KIf6sqNJlA7uJp0leV18I=";
   };
 
   __darwinAllowLocalNetworking = true;
