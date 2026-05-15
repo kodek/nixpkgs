@@ -21013,6 +21013,12 @@
     githubId = 79252025;
     name = "Nicolas Benes";
   };
+  panicrune = {
+    email = "panicrune@tutamail.com";
+    github = "panicrune";
+    githubId = 161863235;
+    name = "panicrune";
+  };
   panky = {
     email = "dev@pankajraghav.com";
     github = "Panky-codes";
@@ -26911,12 +26917,6 @@
         fingerprint = "1E13 12DF 4B71 58B6 EBF9  DE78 2574 3879 62FE B0D1";
       }
     ];
-  };
-  taliyahwebb = {
-    email = "taliyahmail@proton.me";
-    github = "taliyahwebb";
-    githubId = 161863235;
-    name = "Taliyah Webb";
   };
   talkara = {
     email = "taito.horiuchi@relexsolutions.com";
