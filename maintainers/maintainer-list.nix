@@ -30873,6 +30873,13 @@
     githubId = 873857;
     name = "Zack Newman";
   };
+  Zocker1999NET = {
+    github = "Zocker1999NET";
+    githubId = 1645646;
+    name = "Felix Stupp";
+    email = "felix.stupp@banananet.work";
+    keys = [ { fingerprint = "73D0 9948 B239 2D68 8A45  DC83 93E1 BD26 F6B0 2FB7"; } ];
+  };
   zodman = {
     github = "zodman";
     githubId = 44167;
