@@ -24,7 +24,7 @@
   xmltodict,
 }:
 
-buildPythonPackage rec {
+buildPythonPackage (finalAttrs: {
   pname = "python-benedict";
   version = "0.37.0";
   pyproject = true;
@@ -32,7 +32,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "fabiocaccamo";
     repo = "python-benedict";
-    tag = version;
+    tag = finalAttrs.version;
     hash = "sha256-iYCc8e7+7OXpHW2gGxR6ckiTi/Wi5ByqcOFx9e2Eme0=";
   };
 
@@ -96,7 +96,7 @@ buildPythonPackage rec {
     pytestCheckHook
     python-decouple
   ]
-  ++ lib.concatAttrValues optional-dependencies;
+  ++ lib.flatten (builtins.attrValues finalAttrs.passthru.optional-dependencies);
 
   disabledTests = [
     # Tests require network access
@@ -118,8 +118,8 @@ buildPythonPackage rec {
   meta = {
     description = "Module with keylist/keypath support";
     homepage = "https://github.com/fabiocaccamo/python-benedict";
-    changelog = "https://github.com/fabiocaccamo/python-benedict/blob/${src.tag}/CHANGELOG.md";
+    changelog = "https://github.com/fabiocaccamo/python-benedict/blob/${finalAttrs.src.tag}/CHANGELOG.md";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ fab ];
   };
-}
+})
