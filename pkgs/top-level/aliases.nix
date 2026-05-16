@@ -1104,6 +1104,7 @@ mapAliases {
   libgadu = throw "'libgadu' has been removed as upstream is unmaintained and has no dependents or maintainers in Nixpkgs"; # Added 2025-05-17
   libgda = throw "'libgda' has been renamed to/replaced by 'libgda5'"; # Converted to throw 2025-10-27
   libGDSII = libgdsii; # Added 2026-02-08
+  libgestures = throw "'libgestures' has been removed as it was broken and unmaintained upstream"; # Added 2026-05-09
   libgme = throw "'libgme' has been renamed to/replaced by 'game-music-emu'"; # Converted to throw 2025-10-27
   libgnome-keyring3 = throw "'libgnome-keyring3' has been renamed to/replaced by 'libgnome-keyring'"; # Converted to throw 2025-10-27
   libheimdal = throw "'libheimdal' has been renamed to/replaced by 'heimdal'"; # Converted to throw 2025-10-27
@@ -2252,6 +2253,7 @@ mapAliases {
     use the reference implementation 'xdg-terminal-exec' instead.
   " xdg-terminal-exec; # Added 2026-01-14
   xdragon = throw "'xdragon' has been renamed to/replaced by 'dragon-drop'"; # Converted to throw 2025-10-27
+  xf86-input-cmt = throw "'xf86-input-cmt' has been removed as it was broken and unmaintained upstream"; # Added 2026-05-09
   xf86_input_cmt = xf86-input-cmt; # Added 2025-12-12
   xf86_input_wacom = xf86-input-wacom; # Added 2025-12-12
   xf86_video_nested = xf86-video-nested; # added 2026-01-13
