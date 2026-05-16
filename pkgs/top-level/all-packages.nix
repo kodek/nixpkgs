@@ -9547,7 +9547,7 @@ with pkgs;
 
   okteta = kdePackages.callPackage ../applications/editors/okteta { };
 
-  klayout = libsForQt5.callPackage ../applications/misc/klayout { };
+  klayout = qt6Packages.callPackage ../applications/misc/klayout { };
 
   kotatogram-desktop =
     callPackage ../applications/networking/instant-messengers/telegram/kotatogram-desktop
