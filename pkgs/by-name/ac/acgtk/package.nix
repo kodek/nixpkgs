@@ -3,8 +3,10 @@
   stdenv,
   fetchFromGitLab,
   ocamlPackages,
+  darwin,
   dune,
   nix-update-script,
+  writableTmpDirAsHomeHook,
 }:
 
 stdenv.mkDerivation {
@@ -22,12 +24,16 @@ stdenv.mkDerivation {
 
   strictDeps = true;
 
-  nativeBuildInputs = with ocamlPackages; [
-    dune
-    findlib
-    menhir
-    ocaml
-  ];
+  nativeBuildInputs =
+    with ocamlPackages;
+    [
+      dune
+      findlib
+      menhir
+      ocaml
+      writableTmpDirAsHomeHook
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [ darwin.sigtool ];
 
   buildInputs = with ocamlPackages; [
     ansiterminal
