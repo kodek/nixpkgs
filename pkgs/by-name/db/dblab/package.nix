@@ -22,8 +22,8 @@ buildGoModule (finalAttrs: {
     "-X main.version=${finalAttrs.version}"
   ];
 
-  # some tests require network access
-  doCheck = false;
+  doCheck = true;
+  checkFlags = [ "-short" ]; # Skip Docker-based integration tests
 
   meta = {
     description = "Database client every command line junkie deserves";
