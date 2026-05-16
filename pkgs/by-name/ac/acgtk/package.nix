@@ -2,9 +2,9 @@
   lib,
   stdenv,
   fetchFromGitLab,
-  fetchpatch,
   ocamlPackages,
   dune,
+  nix-update-script,
 }:
 
 stdenv.mkDerivation {
@@ -53,6 +53,13 @@ stdenv.mkDerivation {
   installPhase = ''
     dune install -p acgtk --prefix $out --libdir $OCAMLFIND_DESTDIR
   '';
+
+  passthru.updateScript = nix-update-script {
+    extraArgs = [
+      "--version-regex"
+      "^release-(\\d+\\.\\d+\\.\\d+)$"
+    ];
+  };
 
   meta = {
     homepage = "https://acg.loria.fr/";
