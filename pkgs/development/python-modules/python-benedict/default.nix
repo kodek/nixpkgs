@@ -16,8 +16,9 @@
   python-slugify,
   pyyaml,
   requests,
+  pydantic,
   setuptools,
-  toml,
+  tomli-w,
   useful-types,
   xlrd,
   xmltodict,
@@ -25,14 +26,14 @@
 
 buildPythonPackage rec {
   pname = "python-benedict";
-  version = "0.36.0";
+  version = "0.37.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "fabiocaccamo";
     repo = "python-benedict";
     tag = version;
-    hash = "sha256-FIajPROnyuMhM2YzlqJm5A5eRp6v39VHb8RJZjmXqxQ=";
+    hash = "sha256-iYCc8e7+7OXpHW2gGxR6ckiTi/Wi5ByqcOFx9e2Eme0=";
   };
 
   pythonRelaxDeps = [ "boto3" ];
@@ -54,9 +55,10 @@ buildPythonPackage rec {
       mailchecker
       openpyxl
       phonenumbers
+      pydantic
       python-dateutil
       pyyaml
-      toml
+      tomli-w
       xlrd
       xmltodict
     ];
@@ -68,7 +70,7 @@ buildPythonPackage rec {
       beautifulsoup4
       openpyxl
       pyyaml
-      toml
+      tomli-w
       xlrd
       xmltodict
     ];
@@ -79,7 +81,8 @@ buildPythonPackage rec {
       python-dateutil
     ];
     s3 = [ boto3 ];
-    toml = [ toml ];
+    schema = [ pydantic ];
+    toml = [ tomli-w ];
     xls = [
       openpyxl
       xlrd
