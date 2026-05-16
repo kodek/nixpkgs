@@ -3239,6 +3239,8 @@ let
 
       ms-python.vscode-pylance = callPackage ./ms-python.vscode-pylance { };
 
+      ms-python.vscode-python-envs = callPackage ./ms-python.vscode-python-envs { };
+
       ms-toolsai.datawrangler = buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "datawrangler";
