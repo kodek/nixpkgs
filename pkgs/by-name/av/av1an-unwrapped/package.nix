@@ -11,6 +11,7 @@
   rav1e,
   rustPlatform,
   vapoursynth,
+  versionCheckHook,
 }:
 
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -19,7 +20,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   src = fetchFromGitHub {
     owner = "rust-av";
-    repo = "av1an";
+    repo = "Av1an";
     tag = finalAttrs.version;
     hash = "sha256-YF+j349777pE+evvXWTo42DQn1CE0jlfKBEXUFTfcb8=";
   };
@@ -50,16 +51,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeCheckInputs = [
     libaom
     rav1e
+    versionCheckHook
   ];
 
-  passthru = {
-    updateScript = nix-update-script {
-      extraArgs = [
-        "--version-regex"
-        "'^(\\d*\\.\\d*\\.\\d*)$'"
-      ];
-    };
-  };
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "Cross-platform command-line encoding framework";
